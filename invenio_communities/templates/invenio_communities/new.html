@@ -23,6 +23,15 @@
 
 {%- extends config.COMMUNITIES_BASE_TEMPLATE -%}
 
+{%- block css %}
+  {% if is_new -%}
+    {% assets "invenio_communities_css_tree" %}<link href="{{ ASSET_URL }}" rel="stylesheet">{% endassets %}
+  {%- else -%}
+    {% assets "invenio_communities_css_tree_display" %}<link href="{{ ASSET_URL }}" rel="stylesheet">{% endassets %}
+  {%- endif %}
+  {{ super() }}
+{%- endblock css %}
+
 {%- block javascript -%}
   {{ super() }}
   <script src="{{url_for('static', filename='node_modules/ckeditor/ckeditor.js')}}"></script>
@@ -67,6 +76,11 @@
   init_ckeditor("description", 'advanced');
   init_ckeditor("curation_policy", 'advanced');
   </script>
+  {% if is_new -%}
+    {% assets "invenio_communities_js_tree" %}<script src="{{ ASSET_URL }}"></script>{% endassets %}
+  {%- else -%}
+    {% assets "invenio_communities_js_tree_display" %}<script src="{{ ASSET_URL }}"></script>{% endassets %}
+  {%- endif %}
 {%- endblock javascript -%}
 
 {% block page_body %}
@@ -113,10 +127,25 @@
     </div>
   </div> <!-- /.row -->
   <div class="row">
-    <div id="file_container" class="col-md-8">
+    <div id="index_show" class="col-md-3">
+      <div class="panel-group">
+        <div class="panel panel-default">
+          <div class="panel-heading">{{ _("Index Tree") }}</div>
+          <div class="panel-body">
+            {% if is_new -%}
+            <app-tree-community></app-tree-community>
+            {%- else -%}
+            <app-tree-items></app-tree-items>
+            {%- endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="file_container" class="col-md-5">
       <form method="POST" id="edit_form" class="form-horizontal" enctype="multipart/form-data" role="form">
       {{form.csrf_token}}
       <div class="panel-group">
+        <input class="hide" id="index_checked_nodeId" name="index_checked_nodeId" placeholder="" type="text" value="">
       {% if not is_new %}
         <div class="panel panel-default">
           <div class="panel-heading">

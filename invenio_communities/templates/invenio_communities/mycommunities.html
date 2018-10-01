@@ -45,7 +45,7 @@
             <span class="caret"></span>
           </a>
           <ul class="dropdown-menu">
-            <li><a href="{{url_for('.detail', community_id=obj.id)}}"><i class="icon-eye-open"></i> {{ _('View') }}</a></li>
+            <li><a href="{{url_for('.view', community_id=obj.id,)}}"><i class="icon-eye-open"></i> {{ _('View') }}</a></li>
             <li><a href="{{url_for('.curate', community_id=obj.id)}}"><i class="icon-check"></i> {{ _('Curate') }}</a></li>
             <li><a href="{{url_for('.edit', community_id=obj.id)}}"><i class="icon-pencil"></i> {{ _('Edit') }}</a></li>
           </ul>

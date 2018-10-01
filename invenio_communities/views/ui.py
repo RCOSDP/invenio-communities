@@ -37,6 +37,7 @@ from invenio_db import db
 from invenio_indexer.api import RecordIndexer
 from invenio_pidstore.resolver import Resolver
 from invenio_records.api import Record
+from weko_index_tree.api import Indexes
 
 from invenio_communities.forms import CommunityForm, DeleteCommunityForm, \
     EditCommunityForm, SearchForm
@@ -128,6 +129,30 @@ def index():
 
 @blueprint.route('/<string:community_id>/', methods=['GET'])
 @pass_community
+def view(community):
+    """Index page with uploader and list of existing depositions.
+
+    :param community_id: ID of the community to view.
+    """
+    key_val = request.args
+    if key_val and 'view' in key_val:
+        view_val = request.args.get("view")
+    else:
+        view_val = None
+    if not view_val is None and 'basic' in view_val:
+        # return redirect(url_for('.detail', community_id=community.id))
+        return generic_item(
+            community, current_app.config['COMMUNITIES_DETAIL_TEMPLATE'])
+
+    ctx = {'community': community}
+    return render_template(
+        current_app.config['COMMUNITIES_CURATE_TEMPLATE'],
+        **ctx
+    )
+
+
+@blueprint.route('/<string:community_id>/detail/', methods=['GET'])
+@pass_community
 def detail(community):
     """Index page with uploader and list of existing depositions."""
     return generic_item(
@@ -180,13 +205,17 @@ def new():
     })
 
     if form.validate_on_submit():
+
         data = copy.deepcopy(form.data)
 
         community_id = data.pop('identifier')
+
+        root_index_id = data.pop('index_checked_nodeId')
+
         del data['logo']
 
         community = Community.create(
-            community_id, current_user.get_id(), **data)
+            community_id, current_user.get_id(), root_index_id, **data)
 
         file = request.files.get('logo', None)
         if file:
@@ -309,7 +338,41 @@ def curate(community):
         return jsonify({'status': 'success'})
 
     ctx = {'community': community}
+    current_app.logger.debug(ctx)
     return render_template(
         current_app.config['COMMUNITIES_CURATE_TEMPLATE'],
         **ctx
     )
+@blueprint.route('/list/', methods=['GET', ])
+def community_list():
+    """Index page with uploader and list of existing depositions."""
+    ctx = mycommunities_ctx()
+
+    p = request.args.get('p', type=str)
+    so = request.args.get('so', type=str)
+    page = request.args.get('page', type=int, default=1)
+
+    so = so or current_app.config.get('COMMUNITIES_DEFAULT_SORTING_OPTION')
+
+    communities = Community.filter_communities(p, so)
+    featured_community = FeaturedCommunity.get_featured_or_none()
+    form = SearchForm(p=p)
+    per_page = 10
+    page = max(page, 1)
+    p = Pagination(page, per_page, communities.count())
+
+    ctx.update({
+        'r_from': max(p.per_page * (p.page - 1), 0),
+        'r_to': min(p.per_page * p.page, p.total_count),
+        'r_total': p.total_count,
+        'pagination': p,
+        'form': form,
+        'title': _('Communities'),
+        'communities': communities.slice(
+            per_page * (page - 1), per_page * page).all(),
+        'featured_community': featured_community,
+    })
+
+    return render_template(
+        'invenio_communities/communities_list.html', **ctx)
+

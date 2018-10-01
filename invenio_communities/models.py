@@ -38,6 +38,7 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm.exc import FlushError
 from sqlalchemy_utils.models import Timestamp
 from sqlalchemy_utils.types import UUIDType
+from weko_index_tree.models import Index
 
 from .errors import CommunitiesError, InclusionRequestExistsError, \
     InclusionRequestExpiryTimeError, InclusionRequestMissingError, \
@@ -207,6 +208,16 @@ class Community(db.Model, Timestamp):
     deleted_at = db.Column(db.DateTime, nullable=True, default=None)
     """Time at which the community was soft-deleted."""
 
+    # root_node_id = db.Column(db.Text, nullable=False, default='')
+
+    root_node_id = db.Column(
+        db.BigInteger,
+        db.ForeignKey(Index.id),
+        nullable=False
+    )
+
+    """Id of Root Node"""
+
     #
     # Relationships
     #
@@ -214,15 +225,18 @@ class Community(db.Model, Timestamp):
                             foreign_keys=[id_user])
     """Relation to the owner (User) of the community."""
 
+    index = db.relationship(Index, backref='index', foreign_keys=[root_node_id])
+    """Relation to the owner (Index) of the community."""
+
     def __repr__(self):
         """String representation of the community object."""
         return '<Community, ID: {}>'.format(self.id)
 
     @classmethod
-    def create(cls, community_id, user_id, **data):
+    def create(cls, community_id, user_id, root_node_id, **data):
         """Get a community."""
         with db.session.begin_nested():
-            obj = cls(id=community_id, id_user=user_id, **data)
+            obj = cls(id=community_id, id_user=user_id, root_node_id=root_node_id, **data)
             db.session.add(obj)
         return obj
 
