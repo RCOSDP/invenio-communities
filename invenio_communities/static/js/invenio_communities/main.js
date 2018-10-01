@@ -34,5 +34,8 @@ require([
         document.getElementById("invenio-communities-search"),
                                 ['invenioSearch', 'invenioCommunities']
       );
+      communityId = $('#community-id').text()
+      $(".container-fluid").addClass(communityId + "-body");
+      $(".panel").addClass(communityId + "-panel");
     });
   });

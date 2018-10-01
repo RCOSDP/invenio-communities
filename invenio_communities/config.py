@@ -120,3 +120,6 @@ COMMUNITIES_EDIT_TEMPLATE = 'invenio_communities/new.html'
 COMMUNITIES_URL_COMMUNITY_VIEW = \
     '{protocol}://{host}/communities/{community_id}/'
 """String pattern to generate the URL for the view of a community."""
+
+THEME_MATHJAX_CDN = '//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_HTML'
+"""Template for the new community page."""
