@@ -181,10 +181,23 @@ def new():
     })
 
     if form.validate_on_submit():
-        current_app.logger.debug("this is debug")
+
         data = copy.deepcopy(form.data)
 
         community_id = data.pop('identifier')
+
+        root_index_id = data.pop('index_checked_nodeId')
+        indexId_list = Indexes.get_child_index(root_index_id)
+        for index_id in indexId_list:
+            ret = Indexes.update_community_identify(index_id, community_id)
+            if ret == 1:
+                return
+        if ret == 0:
+            db.session.commit()
+        else:
+            db.session.rollback()
+            current_app.logger.debug(index_id)
+
         del data['logo']
 
         community = Community.create(
@@ -203,18 +216,6 @@ def new():
             db.session.commit()
             flash("Community was successfully created.", category='success')
             return redirect(url_for('.edit', community_id=community.id))
-
-        root_index_id = data.pop('index_checked_nodeId')
-        indexId_list = Indexes.get_child_index(root_index_id)
-        for index_id in indexId_list:
-            ret= Indexes.update_community_identify(index_id,community_id)
-            if ret == 1:
-                return
-        if ret == 0:
-            db.session.commit()
-        else:
-            db.session.rollback()
-            current_app.logger.debug(index_id)
 
     return render_template(
         current_app.config['COMMUNITIES_NEW_TEMPLATE'],
