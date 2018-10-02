@@ -179,8 +179,9 @@ def new():
         'is_new': True,
         'community': None,
     })
-    current_app.logger.debug("this is debug")
+
     if form.validate_on_submit():
+        current_app.logger.debug("this is debug")
         data = copy.deepcopy(form.data)
 
         community_id = data.pop('identifier')
