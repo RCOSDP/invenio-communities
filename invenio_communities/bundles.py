@@ -55,3 +55,9 @@ css = NpmBundle(
         'ckeditor': '~4.5.8',
     }
 )
+
+css_tree = Bundle(
+    'scss/invenio_communities/styles.bundle.css',
+    filters='cleancss',
+    output="gen/communities_tree.%(version)s.css.css"
+)

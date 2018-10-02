@@ -23,6 +23,11 @@
 
 {%- extends config.COMMUNITIES_BASE_TEMPLATE -%}
 
+{%- block css %}
+  {% assets "invenio_communities_css_tree" %}<link href="{{ ASSET_URL }}" rel="stylesheet">{% endassets %}
+  {{ super() }}
+{%- endblock css %}
+
 {%- block javascript -%}
   {{ super() }}
   <script src="{{url_for('static', filename='node_modules/ckeditor/ckeditor.js')}}"></script>
@@ -119,7 +124,11 @@
         <div class="panel panel-default">
           <div class="panel-heading">{{ _("Index Tree") }}</div>
           <div class="panel-body">
+            {% if is_new -%}
             <app-tree-community></app-tree-community>
+            {%- else -%}
+            Wating
+            {%- endif %}
           </div>
         </div>
       </div>
