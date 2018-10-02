@@ -125,6 +125,7 @@
       <form method="POST" id="edit_form" class="form-horizontal" enctype="multipart/form-data" role="form">
       {{form.csrf_token}}
       <div class="panel-group">
+        <input class="hide" id="index_checked_nodeId" name="index_checked_nodeId" placeholder="" type="text" value="">
       {% if not is_new %}
         <div class="panel panel-default">
           <div class="panel-heading">
