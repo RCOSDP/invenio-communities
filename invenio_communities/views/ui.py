@@ -179,7 +179,7 @@ def new():
         'is_new': True,
         'community': None,
     })
-
+    current_app.logger.debug("this is debug")
     if form.validate_on_submit():
         data = copy.deepcopy(form.data)
 
@@ -202,7 +202,7 @@ def new():
             db.session.commit()
             flash("Community was successfully created.", category='success')
             return redirect(url_for('.edit', community_id=community.id))
-        current_app.logger.debug("this is debug")
+
         root_index_id = data.pop('index_checked_nodeId')
         indexId_list = Indexes.get_child_index(root_index_id)
         for index_id in indexId_list:
