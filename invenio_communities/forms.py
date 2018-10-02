@@ -40,7 +40,7 @@ class CommunityForm(Form):
     field_sets = [
         ('Information',
          ['identifier', 'title', 'description', 'curation_policy', 'page',
-          'logo', ],
+          'logo','index_checked_nodeId' ],
          {'classes': 'in'}),
     ]
 
@@ -146,6 +146,10 @@ class CommunityForm(Form):
             'Optional. Image file used to aid and promote instant public '
             'recognition. Supported formats: PNG, JPG and SVG. '
             'Max file size: 1.5 MB')
+    )
+
+    index_checked_nodeId = HiddenField(
+        label=_('rootNode')
     )
 
     #
