@@ -189,6 +189,7 @@ def new():
         current_app.logger.debug(data)
 
         root_index_id = data.pop('index_checked_nodeId')
+        Indexes.update_community_identify(root_index_id,community_id)
         Indexes.upd_child_index(root_index_id,community_id)
 
         del data['logo']
