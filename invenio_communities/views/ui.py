@@ -37,6 +37,7 @@ from invenio_db import db
 from invenio_indexer.api import RecordIndexer
 from invenio_pidstore.resolver import Resolver
 from invenio_records.api import Record
+from weko_index_tree.api import Indexes
 
 from invenio_communities.forms import CommunityForm, DeleteCommunityForm, \
     EditCommunityForm, SearchForm
@@ -202,6 +203,18 @@ def new():
             flash("Community was successfully created.", category='success')
             return redirect(url_for('.edit', community_id=community.id))
 
+        root_index_id = data.pop('index_checked_nodeId')
+        indexId_list = Indexes.get_child_index(root_index_id)
+        for index_id in indexId_list:
+            ret= Indexes.update_community_identify(index_id,community_id)
+            if ret == 1:
+                return
+        if ret == 0:
+            db.session.commit()
+        else:
+            db.session.rollback()
+            current_app.logger.debug(index_id)
+            
     return render_template(
         current_app.config['COMMUNITIES_NEW_TEMPLATE'],
         community_form=form,
