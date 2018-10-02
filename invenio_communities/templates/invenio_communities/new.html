@@ -67,6 +67,7 @@
   init_ckeditor("description", 'advanced');
   init_ckeditor("curation_policy", 'advanced');
   </script>
+  {% assets "invenio_communities_js_tree" %}<script src="{{ ASSET_URL }}"></script>{% endassets %}
 {%- endblock javascript -%}
 
 {% block page_body %}
@@ -117,7 +118,9 @@
       <div class="panel-group">
         <div class="panel panel-default">
           <div class="panel-heading">{{ _("Index Tree") }}</div>
-          <div class="panel-body">{{ _("Wating") }}</div>
+          <div class="panel-body">
+            <app-tree-community></app-tree-community>
+          </div>
         </div>
       </div>
     </div>

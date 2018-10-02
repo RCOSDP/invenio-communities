@@ -34,6 +34,13 @@ js = Bundle(
     output='gen/communities.%(version)s.js'
 )
 
+js_tree = NpmBundle(
+    'js/invenio_communities/inline.bundle.js',
+    'js/invenio_communities/polyfills.bundle.js',
+    'js/invenio_communities/main.bundle.js',
+    output='gen/communities_tree.%(version)s.js'
+)
+
 ckeditor = Bundle(
     "js/invenio_communities/ckeditor.js",
     filters=RequireJSFilter(),

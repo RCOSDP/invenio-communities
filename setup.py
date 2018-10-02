@@ -154,6 +154,7 @@ setup(
         ],
         'invenio_assets.bundles': [
             'invenio_communities_js = invenio_communities.bundles:js',
+            'invenio_communities_js_tree = invenio_communities.bundles:js_tree',
             'invenio_communities_css = invenio_communities.bundles:css',
         ]
     },
