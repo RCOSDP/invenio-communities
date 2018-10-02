@@ -186,17 +186,19 @@ def new():
 
         community_id = data.pop('identifier')
 
+        current_app.logger.debug(data)
+
         root_index_id = data.pop('index_checked_nodeId')
-        indexId_list = Indexes.get_child_index(root_index_id)
-        for index_id in indexId_list:
-            ret = Indexes.update_community_identify(index_id, community_id)
-            if ret == 1:
-                return
-        if ret == 0:
-            db.session.commit()
-        else:
-            db.session.rollback()
-            current_app.logger.debug(index_id)
+        # indexId_list = Indexes.get_child_index(root_index_id)
+        # for index_id in indexId_list:
+        #     ret = Indexes.update_community_identify(index_id, community_id)
+        #     if ret == 1:
+        #         return
+        # if ret == 0:
+        #     db.session.commit()
+        # else:
+        #     db.session.rollback()
+        #     current_app.logger.debug(index_id)
 
         del data['logo']
 
