@@ -148,7 +148,9 @@ class CommunityForm(Form):
             'Max file size: 1.5 MB')
     )
 
-    index_checked_nodeId = HiddenField()
+    index_checked_nodeId = HiddenField(
+        label=_('')
+    )
 
     #
     # Validation
