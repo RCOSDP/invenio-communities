@@ -41,6 +41,13 @@ js_tree = NpmBundle(
     output='gen/communities_tree.%(version)s.js'
 )
 
+js_tree_display = NpmBundle(
+    'js/invenio_communities/inline.bundle.js',
+    'js/invenio_communities/polyfills.bundle.js',
+    'js/invenio_communities/main.bundle.js',
+    output='gen/communities_tree_display.%(version)s.js'
+)
+
 ckeditor = Bundle(
     "js/invenio_communities/ckeditor.js",
     filters=RequireJSFilter(),
@@ -60,4 +67,10 @@ css_tree = Bundle(
     'scss/invenio_communities/styles.community.bundle.css',
     filters='cleancss',
     output="gen/communities_tree.%(version)s.css.css"
+)
+
+css_tree_display = Bundle(
+    'scss/invenio_communities/styles.bundle.css',
+    filters='cleancss',
+    output="gen/communities_tree_display.%(version)s.css.css"
 )

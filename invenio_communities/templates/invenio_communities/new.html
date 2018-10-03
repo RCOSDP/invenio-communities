@@ -24,7 +24,11 @@
 {%- extends config.COMMUNITIES_BASE_TEMPLATE -%}
 
 {%- block css %}
-  {% assets "invenio_communities_css_tree" %}<link href="{{ ASSET_URL }}" rel="stylesheet">{% endassets %}
+  {% if is_new -%}
+    {% assets "invenio_communities_css_tree" %}<link href="{{ ASSET_URL }}" rel="stylesheet">{% endassets %}
+  {%- else -%}
+    {% assets "invenio_communities_css_tree_display" %}<link href="{{ ASSET_URL }}" rel="stylesheet">{% endassets %}
+  {%- endif %}
   {{ super() }}
 {%- endblock css %}
 
@@ -72,7 +76,11 @@
   init_ckeditor("description", 'advanced');
   init_ckeditor("curation_policy", 'advanced');
   </script>
-  {% assets "invenio_communities_js_tree" %}<script src="{{ ASSET_URL }}"></script>{% endassets %}
+  {% if is_new -%}
+    {% assets "invenio_communities_js_tree" %}<script src="{{ ASSET_URL }}"></script>{% endassets %}
+  {%- else -%}
+    {% assets "invenio_communities_js_tree_display" %}<script src="{{ ASSET_URL }}"></script>{% endassets %}
+  {%- endif %}
 {%- endblock javascript -%}
 
 {% block page_body %}
@@ -127,7 +135,7 @@
             {% if is_new -%}
             <app-tree-community></app-tree-community>
             {%- else -%}
-            Wating
+            <app-tree-items></app-tree-items>
             {%- endif %}
           </div>
         </div>
