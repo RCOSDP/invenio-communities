@@ -35,9 +35,9 @@ js = Bundle(
 )
 
 js_tree = NpmBundle(
-    'js/invenio_communities/inline.bundle.js',
-    'js/invenio_communities/polyfills.bundle.js',
-    'js/invenio_communities/main.bundle.js',
+    'js/invenio_communities/inline.community.bundle.js',
+    'js/invenio_communities/polyfills.community.bundle.js',
+    'js/invenio_communities/main.community.bundle.js',
     output='gen/communities_tree.%(version)s.js'
 )
 
@@ -57,7 +57,7 @@ css = NpmBundle(
 )
 
 css_tree = Bundle(
-    'scss/invenio_communities/styles.bundle.css',
+    'scss/invenio_communities/styles.community.bundle.css',
     filters='cleancss',
     output="gen/communities_tree.%(version)s.css.css"
 )
