@@ -186,8 +186,6 @@ def new():
 
         community_id = data.pop('identifier')
 
-        current_app.logger.debug(data)
-
         root_index_id = data.pop('index_checked_nodeId')
         Indexes.update_community_identify(root_index_id,community_id)
         Indexes.upd_child_index(root_index_id,community_id)
@@ -195,7 +193,7 @@ def new():
         del data['logo']
 
         community = Community.create(
-            community_id, current_user.get_id(), **data)
+            community_id, current_user.get_id(), root_index_id, **data)
 
         file = request.files.get('logo', None)
         if file:
