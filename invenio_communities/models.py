@@ -218,6 +218,9 @@ class Community(db.Model, Timestamp):
                             foreign_keys=[id_user])
     """Relation to the owner (User) of the community."""
 
+    index = db.relationship(Index, backref='index')
+    """Relation to the owner (User) of the community."""
+
     def __repr__(self):
         """String representation of the community object."""
         return '<Community, ID: {}>'.format(self.id)
