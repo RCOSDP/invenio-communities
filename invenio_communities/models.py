@@ -208,7 +208,14 @@ class Community(db.Model, Timestamp):
     deleted_at = db.Column(db.DateTime, nullable=True, default=None)
     """Time at which the community was soft-deleted."""
 
-    root_node_id = db.Column(db.Text, nullable=False, default='')
+    # root_node_id = db.Column(db.Text, nullable=False, default='')
+
+    root_node_id = db.Column(
+        db.Text,
+        db.ForeignKey(Index.id),
+        nullable=False
+    )
+
     """Id of Root Node"""
 
     #
@@ -218,7 +225,7 @@ class Community(db.Model, Timestamp):
                             foreign_keys=[id_user])
     """Relation to the owner (User) of the community."""
 
-    index = db.relationship(Index, backref='index')
+    index = db.relationship(Index, backref='index', foreign_keys=[root_node_id])
     """Relation to the owner (User) of the community."""
 
     def __repr__(self):
