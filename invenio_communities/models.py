@@ -38,6 +38,7 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm.exc import FlushError
 from sqlalchemy_utils.models import Timestamp
 from sqlalchemy_utils.types import UUIDType
+from weko_index_tree.models import Index
 
 from .errors import CommunitiesError, InclusionRequestExistsError, \
     InclusionRequestExpiryTimeError, InclusionRequestMissingError, \
@@ -216,6 +217,8 @@ class Community(db.Model, Timestamp):
     owner = db.relationship(User, backref='communities',
                             foreign_keys=[id_user])
     """Relation to the owner (User) of the community."""
+
+    index_info = db.relationship(Index,backref='index')
 
     def __repr__(self):
         """String representation of the community object."""
