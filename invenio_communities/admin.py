@@ -43,12 +43,13 @@ class CommunityModelView(ModelView):
     can_delete = False
     can_view_details = True
     column_display_all_relations = True
-    form_columns = ('id', 'owner', 'title', 'description', 'page',
+    form_columns = ('id', 'owner', 'root_node_id', 'title', 'description', 'page',
                     'ranking', 'fixed_points')
     column_list = (
         'id',
         'title',
         'owner.id',
+        'root_node_id',
         'deleted_at',
         'last_record_accepted',
         'ranking',
