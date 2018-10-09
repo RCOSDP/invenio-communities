@@ -321,7 +321,7 @@ def curate(community):
         **ctx
     )
 
-@blueprint.route('/<string:community_id>/', methods=['POST'])
+@blueprint.route('/<string:community_id>/', methods=['GET','POST'])
 @login_required
 @pass_community
 @permission_required('community-curate')
