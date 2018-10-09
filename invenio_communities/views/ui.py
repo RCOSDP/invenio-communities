@@ -127,7 +127,7 @@ def index():
         current_app.config['COMMUNITIES_INDEX_TEMPLATE'], **ctx)
 
 
-@blueprint.route('/<string:community_id>/', methods=['GET'])
+@blueprint.route('/<string:community_id>/aa/', methods=['GET'])
 @pass_community
 def detail(community):
     """Index page with uploader and list of existing depositions."""
@@ -321,7 +321,7 @@ def curate(community):
         **ctx
     )
 
-@blueprint.route('/<string:community_id>/view/', methods=['GET','POST'])
+@blueprint.route('/<string:community_id>/', methods=['GET','POST'])
 @login_required
 @pass_community
 @permission_required('community-curate')
