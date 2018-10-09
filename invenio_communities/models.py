@@ -226,7 +226,7 @@ class Community(db.Model, Timestamp):
     """Relation to the owner (User) of the community."""
 
     index = db.relationship(Index, backref='index', foreign_keys=[root_node_id])
-    """Relation to the owner (User) of the community."""
+    """Relation to the owner (Index) of the community."""
 
     def __repr__(self):
         """String representation of the community object."""
