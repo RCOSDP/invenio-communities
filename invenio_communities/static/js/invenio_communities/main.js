@@ -25,6 +25,11 @@ require([
   "node_modules/invenio-search-js/dist/invenio-search-js",
   "js/invenio_communities/module",
   ], function() {
+    $('#view_val').on('change', function(){
+      let view_val = $('#view_val').val();
+      let view_url = $('#view_link').href.val();
+      alert(view_url)
+    })
     // loading all the jQuery modules for the not require.js ready scripts
     // everywhere.
 
@@ -35,9 +40,4 @@ require([
                                 ['invenioSearch', 'invenioCommunities']
       );
     });
-    $('#btn_up_acl_group').on('click', function(){
-      let view_val = $('#view_val').val();
-      let view_url = $('#view_link').href.val();
-      alert(view_url)
-    })
   });
