@@ -127,7 +127,19 @@ def index():
         current_app.config['COMMUNITIES_INDEX_TEMPLATE'], **ctx)
 
 
-@blueprint.route('/<string:community_id>/aa/', methods=['GET'])
+@blueprint.route('/<string:community_id>/', methods=['GET'])
+@pass_community
+def view(community):
+    """Index page with uploader and list of existing depositions.
+
+    :param community_id: ID of the community to view.
+    """
+    return render_template(
+        community, current_app.config['COMMUNITIES_CURATE_TEMPLATE'],
+    )
+
+
+@blueprint.route('/<string:community_id>/detail/', methods=['GET'])
 @pass_community
 def detail(community):
     """Index page with uploader and list of existing depositions."""
@@ -283,49 +295,6 @@ def delete(community):
 @pass_community
 @permission_required('community-curate')
 def curate(community):
-    """Index page with uploader and list of existing depositions.
-
-    :param community_id: ID of the community to curate.
-    """
-    if request.method == 'POST':
-        action = request.json.get('action')
-        recid = request.json.get('recid')
-
-        # 'recid' is mandatory
-        if not recid:
-            abort(400)
-        if action not in ['accept', 'reject', 'remove']:
-            abort(400)
-
-        # Resolve recid to a Record
-        resolver = Resolver(
-            pid_type='recid', object_type='rec', getter=Record.get_record)
-        pid, record = resolver.resolve(recid)
-
-        # Perform actions
-        if action == "accept":
-            community.accept_record(record)
-        elif action == "reject":
-            community.reject_record(record)
-        elif action == "remove":
-            community.remove_record(record)
-
-        record.commit()
-        db.session.commit()
-        RecordIndexer().index_by_id(record.id)
-        return jsonify({'status': 'success'})
-
-    ctx = {'community': community}
-    return render_template(
-        current_app.config['COMMUNITIES_CURATE_TEMPLATE'],
-        **ctx
-    )
-
-@blueprint.route('/<string:community_id>/', methods=['GET','POST'])
-@login_required
-@pass_community
-@permission_required('community-curate')
-def view_community(community):
     """Index page with uploader and list of existing depositions.
 
     :param community_id: ID of the community to curate.

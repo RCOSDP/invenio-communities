@@ -44,7 +44,7 @@ class CommunityModelView(ModelView):
     can_view_details = True
     column_display_all_relations = True
     form_columns = ('id', 'owner', 'index', 'title', 'description', 'page',
-                    'ranking', 'fixed_points')
+                    'curation_policy', 'ranking', 'fixed_points')
     column_list = (
         'id',
         'title',
