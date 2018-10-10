@@ -102,9 +102,10 @@
                       <div class="pull-right">
                         <a id= "view_link" href="{{url_for('.view', community_id=obj.id)}}" class="hide">{{ _('View') }}</a>
                         <div class="form-group">
-                          <select class="form-control" id="view_val" value="View">
-                            <option value="20">20</option>
-                            <option value="50">50</option>
+                          <select class="form-control" id="view_val">
+                            <option value="">{{ _('View') }}</option>
+                            <option value="basic">{{ _('Basic') }}</option>
+                            <option value="weko">{{ _('Weko') }}</option>
                           </select>
                         </div>
                         {% if obj.id_user == current_user.id %}

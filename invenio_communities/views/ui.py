@@ -134,11 +134,16 @@ def view(community):
 
     :param community_id: ID of the community to view.
     """
-    ctx = {'community': community}
-    return render_template(
-        current_app.config['COMMUNITIES_CURATE_TEMPLATE'],
-        **ctx
-    )
+    view_val = request.args.get("view")
+    current_app.logger.debug(view_val)
+    if 'basic' in view_val:
+        return redirect(url_for('.detail', community_id=community.id))
+    else:
+        ctx = {'community': community}
+        return render_template(
+            current_app.config['COMMUNITIES_CURATE_TEMPLATE'],
+            **ctx
+        )
 
 
 @blueprint.route('/<string:community_id>/detail/', methods=['GET'])
