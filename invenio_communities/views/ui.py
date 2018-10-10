@@ -136,7 +136,9 @@ def view(community):
     """
     view_val = request.args.get("view")
     if 'basic' in view_val:
-        return redirect(url_for('.detail', community_id=community.id))
+        # return redirect(url_for('.detail', community_id=community.id))
+        return generic_item(
+            community, current_app.config['COMMUNITIES_DETAIL_TEMPLATE'])
     else:
         ctx = {'community': community}
         return render_template(
