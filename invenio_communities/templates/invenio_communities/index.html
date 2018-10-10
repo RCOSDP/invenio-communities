@@ -100,8 +100,13 @@
                   <div class="well">
                     <h4>
                       <div class="pull-right">
-                        &nbsp;
-                        <a href="{{url_for('.view', community_id=obj.id)}}" class="btn btn-info">{{ _('View') }}</a>
+                        <!--<a href="{{url_for('.view', community_id=obj.id)}}" class="btn btn-info">{{ _('View') }}</a>-->
+                        <select class="form-control" id="page_count">
+                          <option value="20"><a href="{{url_for('.view', community_id=obj.id)}}" class="btn btn-info">{{ _('View') }}</a></option>
+                          <option value="50">50</option>
+                          <option value="75">75</option>
+                          <option value="100">100</option>
+                        </select>
                         {% if obj.id_user == current_user.id %}
                           <a href="{{url_for('.curate', community_id=obj.id)}}" class="btn btn-info">{{ _('Curate') }}</a>
                         {% endif %}
