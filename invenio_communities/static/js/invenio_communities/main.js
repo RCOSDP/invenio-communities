@@ -27,7 +27,7 @@ require([
   ], function() {
     $('#view_val').on('change', function(){
       let view_val = $('#view_val').val();
-      let view_url = $('#view_link').href;
+      let view_url = document.getElementById('view_link').href
       alert(view_url)
     })
     // loading all the jQuery modules for the not require.js ready scripts
