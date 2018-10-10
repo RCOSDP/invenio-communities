@@ -101,12 +101,12 @@
                     <h4>
                       <div class="pull-right">
                         <!--<a href="{{url_for('.view', community_id=obj.id)}}" class="btn btn-info">{{ _('View') }}</a>-->
-                        <select class="form-control" id="view_op" onchange="alert(11)">
-                          <option value="20">{{ _('View') }}</option>
-                          <option value="50">50</option>
-                          <option value="75">75</option>
-                          <option value="100">100</option>
-                        </select>
+                        <div class="form-group">
+                          <select class="form-control" id="page_count" value="View">
+                            <option value="20">20</option>
+                            <option value="50">50</option>
+                          </select>
+                        </div>
                         {% if obj.id_user == current_user.id %}
                           <a href="{{url_for('.curate', community_id=obj.id)}}" class="btn btn-info">{{ _('Curate') }}</a>
                         {% endif %}
