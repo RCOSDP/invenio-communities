@@ -134,8 +134,10 @@ def view(community):
 
     :param community_id: ID of the community to view.
     """
+    ctx = {'community': community}
     return render_template(
-        community, current_app.config['COMMUNITIES_CURATE_TEMPLATE'],
+        current_app.config['COMMUNITIES_CURATE_TEMPLATE'],
+        **ctx
     )
 
 
