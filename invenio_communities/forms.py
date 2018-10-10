@@ -40,7 +40,7 @@ class CommunityForm(Form):
     field_sets = [
         ('Information',
          ['identifier', 'title', 'description', 'curation_policy', 'page',
-          'header', 'logo', ],
+          'community_header', 'logo', ],
          {'classes': 'in'}),
     ]
 
@@ -133,7 +133,7 @@ class CommunityForm(Form):
             'the index page.'),
     )
 
-    header = TextAreaField(
+    community_header = TextAreaField(
         description=_(
             'Optional. A header design of the community collection,'
             ' which will be displayed on the index page of the community.'),
@@ -143,7 +143,7 @@ class CommunityForm(Form):
         'identifier': 'barcode',
         'title': 'file-alt',
         'description': 'pencil',
-        'header': 'pencil',
+        'community_header': 'pencil',
         'curation_policy': 'check',
     }
 
