@@ -190,6 +190,12 @@ class Community(db.Model, Timestamp):
 
     curation_policy = db.Column(db.Text(), nullable=False, default='')
     """Community curation policy."""
+# TODO
+    community_header = db.Column(db.Text, nullable=False, default='')
+    """Header design of community, displayed in portal boxes."""
+
+    community_footer = db.Column(db.Text, nullable=False, default='')
+    """Footer design of community, displayed in portal boxes."""
 
     last_record_accepted = db.Column(
         db.DateTime(), nullable=False, default=datetime(2000, 1, 1, 0, 0, 0))
