@@ -101,7 +101,7 @@
                     <h4>
                       <div class="pull-right">
                         <!--<a href="{{url_for('.view', community_id=obj.id)}}" class="btn btn-info">{{ _('View') }}</a>-->
-                        <select class="form-control" id="view_op" onchange="{{url_for('.view', community_id=obj.id)}}">
+                        <select class="form-control" id="view_op" onchange="location.herf={{url_for('.view', community_id=obj.id)}}">
                           <option value="20">{{ _('View') }}</option>
                           <option value="50">50</option>
                           <option value="75">75</option>
