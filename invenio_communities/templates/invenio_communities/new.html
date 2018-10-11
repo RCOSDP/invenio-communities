@@ -50,14 +50,14 @@
               toolbar: [
                   ['PasteText','PasteFromWord'],
                   ['Bold','Italic','Strike','-','Subscript','Superscript',],
-                  ['NumberedList','BulletedList', 'Blockquote', 'Table', 'Image', '-', 'Link', 'Anchor'],
+                  ['NumberedList','BulletedList', 'Blockquote', 'Table', 'base64image', '-', 'Link', 'Anchor'],
                   ['Undo','Redo','-','Find','Replace','-', 'RemoveFormat'],
                   ['Mathjax', 'SpecialChar', 'ScientificChar'],
                   ['Styles', 'Format'], ['Source'], ['Maximize'],
               ],
-              extraPlugins: 'blockquote,mathjax', //scientificchar,
+              extraPlugins: 'blockquote,mathjax,pastefromword,base64image,dialog,dialogui,pastebase64,plantuml', //scientificchar,
               disableNativeSpellChecker: false,
-              removePlugins: 'elementspath',
+              removePlugins: 'elementspath,image',
               removeButtons: '',
               mathJaxLib: '{{config.THEME_MATHJAX_CDN}}'
           });
