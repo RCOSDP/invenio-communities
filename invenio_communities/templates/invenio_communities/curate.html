@@ -61,6 +61,11 @@
 </div>
 {%- endblock body_inner %}
 
+{%- block page_footer %}
+<!--{% set search_input_placeholder = "Search " + community.title %}-->
+<!--{% include "invenio_search_ui/header.html" %}-->
+{%- endblock page_footer %}
+
 {%- block search_results %}
 <invenio-search-results-provisional
  template="{{ url_for('static', filename=config.COMMUNITIES_JSTEMPLATE_RESULTS_CURATE) }}"
