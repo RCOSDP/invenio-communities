@@ -308,7 +308,7 @@ def curate(community):
         RecordIndexer().index_by_id(record.id)
         return jsonify({'status': 'success'})
 
-    ctx = {'community': community, 'html': community.community_header}
+    ctx = {'community': community}
     return render_template(
         current_app.config['COMMUNITIES_CURATE_TEMPLATE'],
         **ctx
