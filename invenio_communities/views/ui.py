@@ -44,7 +44,7 @@ from invenio_communities.forms import CommunityForm, DeleteCommunityForm, \
 from invenio_communities.models import Community, FeaturedCommunity
 from invenio_communities.proxies import current_permission_factory
 from invenio_communities.utils import Pagination, render_template_to_string
-from .api import Action, Flow, WorkActivity, WorkActivityHistory, WorkFlow, UpdateItem
+from .api import  WorkActivity
 
 blueprint = Blueprint(
     'invenio_communities',
