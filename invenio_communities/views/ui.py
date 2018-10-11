@@ -44,6 +44,7 @@ from invenio_communities.forms import CommunityForm, DeleteCommunityForm, \
 from invenio_communities.models import Community, FeaturedCommunity
 from invenio_communities.proxies import current_permission_factory
 from invenio_communities.utils import Pagination, render_template_to_string
+from .api import Action, Flow, WorkActivity, WorkActivityHistory, WorkFlow, UpdateItem
 
 blueprint = Blueprint(
     'invenio_communities',
@@ -343,4 +344,15 @@ def curate(community):
     return render_template(
         current_app.config['COMMUNITIES_CURATE_TEMPLATE'],
         **ctx
+    )
+
+@blueprint.route('/list/', methods=['GET', 'POST'])
+@login_required
+def communities_list():
+    """Render a basic view."""
+    activity = WorkActivity()
+    activities = activity.get_activity_list()
+    return render_template(
+        'weko_workflow/activity_list.html',
+        activities=activities
     )
