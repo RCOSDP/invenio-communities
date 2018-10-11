@@ -134,7 +134,8 @@ def view(community):
 
     :param community_id: ID of the community to view.
     """
-    if request.has_key('view'):
+    key_val = request.args
+    if key_val and 'view' in key_val:
         view_val = request.args.get("view")
     else:
         view_val = None
