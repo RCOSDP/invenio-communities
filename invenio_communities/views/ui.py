@@ -349,9 +349,6 @@ def curate(community):
 @login_required
 def communities_list():
     """Render a basic view."""
-    return render_template(
-        'weko_workflow/activity_list.html'
-    )
     ctx = mycommunities_ctx()
 
     p = request.args.get('p', type=str)
