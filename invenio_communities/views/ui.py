@@ -123,8 +123,10 @@ def index():
         'featured_community': featured_community,
     })
 
+    # return render_template(
+    #     current_app.config['COMMUNITIES_INDEX_TEMPLATE'], **ctx)
     return render_template(
-        current_app.config['COMMUNITIES_INDEX_TEMPLATE'], **ctx)
+        'invenio_communities/communities_list.html', **ctx)
 
 
 @blueprint.route('/<string:community_id>/', methods=['GET'])
