@@ -345,7 +345,7 @@ def curate(community):
         **ctx
     )
 
-@blueprint.route('/<string:community_id>/list/', methods=['GET', 'POST'])
+@blueprint.route('/list/', methods=['GET', 'POST'])
 @login_required
 def communities_list():
     """Render a basic view."""
