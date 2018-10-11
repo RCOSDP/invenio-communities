@@ -23,7 +23,7 @@
 
 {% extends config.SEARCH_UI_SEARCH_TEMPLATE %}
 
-{%- from "invenio_communities/macros.html" import community_header %}
+{%- from "invenio_communities/macros.html" import community_header, community_footer %}
 
 <!--{% set title = community.title + " | " + config.THEME_SITENAME %}-->
 <!--{% set search_hidden_params = {"provisional_communities": community.id} %}-->
@@ -48,6 +48,8 @@
   {{ community_header(community, subtitle='Pending Requests')
   }}
   {{super()}}
+  {{ community_footer(community, subtitle='Pending Requests')
+  }}
 </div>
 <div class="communities">
 </div>
