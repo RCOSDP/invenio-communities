@@ -101,12 +101,25 @@
                     <h4>
                       <div class="pull-right">
                         <a id= "view_link" href="{{url_for('.view', community_id=obj.id)}}" class="hide">{{ _('View') }}</a>
-                        <div class="form-group">
-                          <select class="form-control" id="view_val">
-                            <option value="">{{ _('View') }}</option>
-                            <option value="basic">{{ _('Basic') }}</option>
-                            <option value="weko">{{ _('Weko') }}</option>
-                          </select>
+                        <!--<div class="form-group">-->
+                          <!--<select class="form-control" id="view_val">-->
+                            <!--<option value="">{{ _('View') }}</option>-->
+                            <!--<option value="basic">{{ _('Basic') }}</option>-->
+                            <!--<option value="weko">{{ _('Weko') }}</option>-->
+                          <!--</select>-->
+                        <!--</div>-->
+                        <div class="dropdown">
+                            <button type="button" class="btn dropdown-toggle" id="dropdownMenu_View" data-toggle="dropdown">{{ _('View') }}
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu_View">
+                                <li role="presentation">
+                                    <a role="menuitem" tabindex="-1" href="{{url_for('.view', community_id=obj.id), view='basic'}}">{{ _('Basic') }}</a>
+                                </li>
+                                <li role="presentation">
+                                    <a role="menuitem" tabindex="-1" href="{{url_for('.view', community_id=obj.id), view='weko'}}">{{ _('Weko') }}</a>
+                                </li>
+                            </ul>
                         </div>
                         {% if obj.id_user == current_user.id %}
                           <a href="{{url_for('.curate', community_id=obj.id)}}" class="btn btn-info">{{ _('Curate') }}</a>
