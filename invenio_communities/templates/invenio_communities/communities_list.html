@@ -22,12 +22,12 @@
 
 {%- block css %}
   {{ super() }}
-  {% assets "invenio_communities_css" %}<link href="{{ ASSET_URL }}" rel="stylesheet">{% endassets %}
+  <!--{% assets "invenio_communities_css" %}<link href="{{ ASSET_URL }}" rel="stylesheet">{% endassets %}-->
 {%- endblock css %}
 
 {%- block javascript -%}
   {{ super() }}
-  {% assets "invenio_communities_js" %}<script src="{{ ASSET_URL }}"></script>{% endassets %}
+  <!--{% assets "invenio_communities_js" %}<script src="{{ ASSET_URL }}"></script>{% endassets %}-->
 {%- endblock javascript -%}
 
 {%- block page_body_tabs %}
