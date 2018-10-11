@@ -36,6 +36,11 @@
   {% assets "invenio_communities_js" %}<script src="{{ ASSET_URL }}"></script>{% endassets %}
 {%- endblock javascript -%}
 
+{%- block page_body_tabs %}
+  {% from "weko_theme/macros/tabs_selector.html" import tabs_selector %}
+  {{ tabs_selector('community') }}
+{%- endblock page_body_tabs %}
+
 {% block page_body %}
 <div class="communities">
   {{ community_header(community, link=False) }}
