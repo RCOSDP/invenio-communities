@@ -22,12 +22,12 @@
 
 {%- block css %}
   {{ super() }}
-  <!--{% assets "invenio_communities_css" %}<link href="{{ ASSET_URL }}" rel="stylesheet">{% endassets %}-->
+  {% assets "invenio_communities_css" %}<link href="{{ ASSET_URL }}" rel="stylesheet">{% endassets %}
 {%- endblock css %}
 
 {%- block javascript -%}
   {{ super() }}
-  <!--{% assets "invenio_communities_js" %}<script src="{{ ASSET_URL }}"></script>{% endassets %}-->
+  {% assets "invenio_communities_js" %}<script src="{{ ASSET_URL }}"></script>{% endassets %}
 {%- endblock javascript -%}
 
 {%- block page_body_tabs %}
@@ -35,7 +35,7 @@
   {{ tabs_selector('community') }}
 {%- endblock page_body_tabs %}
 
-{%- block page_body_main %}
+{%- block page_body %}
 <div class="row">
   <div class="col-sm-12">
     <table class="table table-striped table-bordered">
@@ -118,4 +118,4 @@
     </table>
   </div>
 </div>
-{%- endblock page_body_main %}
+{%- endblock page_body %}
