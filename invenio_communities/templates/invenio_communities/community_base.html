@@ -23,7 +23,7 @@
 
 {% extends config.SEARCH_UI_BASE_TEMPLATE %}
 
-{%- from "invenio_communities/macros.html" import community_header %}
+{%- from "invenio_communities/macros.html" import community_header, community_footer %}
 
 {% set title = community.title + " | " + config.THEME_SITENAME %}
 
@@ -41,5 +41,6 @@
   {{ community_header(community, link=False) }}
   {%- block community_body %}
   {%- endblock community_body %}
+  {{ community_footer(community, link=False) }}
 </div>
 {% endblock page_body %}
