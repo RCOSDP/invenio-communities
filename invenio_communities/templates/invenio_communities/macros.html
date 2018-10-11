@@ -20,7 +20,7 @@
 # waive the privileges and immunities granted to it by virtue of its status
 # as an Intergovernmental Organization or submit itself to any jurisdiction.
 #}
-{% macro community_header(community, link=True, subtitle=None) %}
+{% macro community_header(community, link=True, subtitle=None, wysiwyg) %}
 <div class="header">
   <div class="container">
     <div class="row">
@@ -38,9 +38,7 @@
         </h1>
       </div>
       {% else %}
-      <div id="wysiwyg_header">
-        <p><strong>Community Footer</strong></p>
-      </div>
+      <div id="wysiwyg_header">{{wysiwyg}}</div>
       {%- endif %}
     </div>
   </div>

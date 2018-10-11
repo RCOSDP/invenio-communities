@@ -30,6 +30,7 @@
 
 {%- block page_header %}
 {% set search_input_placeholder = "Search " + community.title %}
+{% set wysiwyg = "<p><strong>Community Footer</strong></p>" %}
 <!--{% include "invenio_search_ui/header.html" %}-->
 {%- endblock page_header %}
 
@@ -45,7 +46,7 @@
 
 {% block page_body %}
 <div class="communities">
-  {{ community_header(community, subtitle='Pending Requests') }}
+  {{ community_header(community, subtitle='Pending Requests', wysiwyg) }}
   {{super()}}
 </div>
 {% endblock page_body %}
