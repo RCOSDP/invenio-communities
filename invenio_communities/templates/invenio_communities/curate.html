@@ -25,13 +25,13 @@
 
 {%- from "invenio_communities/macros.html" import community_header %}
 
-<!--{% set title = community.title + " | " + config.THEME_SITENAME %}-->
+{% set title = community.title + " | " + config.THEME_SITENAME %}
 <!--{% set search_hidden_params = {"provisional_communities": community.id} %}-->
 
-<!--{%- block page_header %}-->
-<!--{% set search_input_placeholder = "Search " + community.title %}-->
+{%- block page_header %}
+{% set search_input_placeholder = "Search " + community.title %}
 <!--{% include "invenio_search_ui/header.html" %}-->
-<!--{%- endblock page_header %}-->
+{%- endblock page_header %}
 
 {%- block css %}
   {{ super() }}
