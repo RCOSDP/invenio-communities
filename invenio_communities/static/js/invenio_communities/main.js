@@ -21,6 +21,7 @@
 // as an Intergovernmental Organization or submit itself to any jurisdiction.
 require([
   "jquery",
+  "bootstrap",
   "node_modules/angular/angular",
   "node_modules/invenio-search-js/dist/invenio-search-js",
   "js/invenio_communities/module",
