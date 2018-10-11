@@ -134,12 +134,12 @@ def view(community):
 
     :param community_id: ID of the community to view.
     """
-    if request.REQUEST.has_key('view'):
-        view_val = request.args.get("view")
-        if 'basic' in view_val:
-            # return redirect(url_for('.detail', community_id=community.id))
-            return generic_item(
-                community, current_app.config['COMMUNITIES_DETAIL_TEMPLATE'])
+
+    view_val = request.args.get("view")
+    if 'basic' in view_val:
+        # return redirect(url_for('.detail', community_id=community.id))
+        return generic_item(
+            community, current_app.config['COMMUNITIES_DETAIL_TEMPLATE'])
 
     ctx = {'community': community}
     return render_template(
