@@ -45,7 +45,7 @@
 
 {% block page_body %}
 <div class="communities">
-  {{ community_header(community, subtitle='Pending Requests', wysiwyg=html)
+  {{ community_header(community, subtitle='Pending Requests', wysiwyg=community.community_header)
   }}
   {{super()}}
 </div>
