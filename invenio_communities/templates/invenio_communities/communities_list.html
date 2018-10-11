@@ -109,7 +109,14 @@
         </tr>
         {%- endfor %}
       {%- endfor %}
-      {% if pagination.total_count > pagination.per_page %}
+    {% else %}
+        <p class="text-muted text-center">
+          <strong>{{ _('Your search did not match any communities. Please try again.') }}</strong>
+        </p>
+    {% endif %}
+    </tbody>
+    </table>
+    {% if pagination.total_count > pagination.per_page %}
           <div align="center">
             <ul class="pagination">
               <li{{ ' class="disabled"'|safe if not pagination.has_prev }}>
@@ -145,13 +152,6 @@
             </ul>
           </div>
       {% endif %}
-    {% else %}
-        <p class="text-muted text-center">
-          <strong>{{ _('Your search did not match any communities. Please try again.') }}</strong>
-        </p>
-    {% endif %}
-    </tbody>
-    </table>
   </div>
 </div>
 {%- endblock page_body_main %}
