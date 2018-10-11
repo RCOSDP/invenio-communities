@@ -38,7 +38,7 @@
         </h1>
       </div>
       {% else %}
-      <div id="wysiwyg_header">{{wysiwyg}}</div>
+      <div id="wysiwyg_header">{{ html|safe }}</div>
       {%- endif %}
     </div>
   </div>
