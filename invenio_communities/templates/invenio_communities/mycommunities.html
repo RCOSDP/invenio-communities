@@ -45,7 +45,22 @@
             <span class="caret"></span>
           </a>
           <ul class="dropdown-menu">
-            <li><a href="{{url_for('.view', community_id=obj.id,)}}"><i class="icon-eye-open"></i> {{ _('View') }}</a></li>
+            <!--<li><a href="{{url_for('.view', community_id=obj.id,)}}"><i class="icon-eye-open"></i> {{ _('View') }}</a></li>-->
+            <li>
+              <div class="dropdown">
+                  <button type="button" class="btn dropdown-toggle" id="dropdownMenu_View" data-toggle="dropdown">{{ _('View') }}
+                      <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu_View">
+                      <li role="presentation">
+                          <a role="menuitem" tabindex="-1" href="{{url_for('.view', community_id=obj.id, view='basic')}}">{{ _('Basic') }}</a>
+                      </li>
+                      <li role="presentation">
+                          <a role="menuitem" tabindex="-1" href="{{url_for('.view', community_id=obj.id, view='weko')}}">{{ _('Weko') }}</a>
+                      </li>
+                  </ul>
+              </div>
+            </li>
             <li><a href="{{url_for('.curate', community_id=obj.id)}}"><i class="icon-check"></i> {{ _('Curate') }}</a></li>
             <li><a href="{{url_for('.edit', community_id=obj.id)}}"><i class="icon-pencil"></i> {{ _('Edit') }}</a></li>
           </ul>
