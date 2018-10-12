@@ -227,8 +227,11 @@ def edit(community):
 
     if form.validate_on_submit():
         data = copy.deepcopy(request.values)
-        color_bg1 = data.get('color_bg1')
-        flash(color_bg1)
+        for k,v in data.items():
+            flash(k)
+            flash(v)
+        # color_bg1 = data.get(color_bg1)
+        # flash(color_bg1)
 
 
         for field, val in form.data.items():
