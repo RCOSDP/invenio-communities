@@ -226,6 +226,11 @@ def edit(community):
     })
 
     if form.validate_on_submit():
+        data = copy.deepcopy(form.data)
+        flash(data)
+        # community_id = data.pop('identifier')
+
+
         for field, val in form.data.items():
             setattr(community, field, val)
 
