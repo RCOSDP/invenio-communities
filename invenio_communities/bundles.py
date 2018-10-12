@@ -48,11 +48,6 @@ js_tree_display = NpmBundle(
     output='gen/communities_tree_display.%(version)s.js'
 )
 
-community_js = NpmBundle(
-    'js/invenio_communities/community_list.js',
-    output='gen/communities_tap.%(version)s.js'
-)
-
 ckeditor = Bundle(
     "js/invenio_communities/ckeditor.js",
     filters=RequireJSFilter(),
