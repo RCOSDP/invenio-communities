@@ -226,7 +226,7 @@ def edit(community):
     })
 
     if form.validate_on_submit():
-        data = copy.deepcopy(form.data)
+        data = copy.deepcopy(request.values)
         flash(form)
         # community_id = data.pop('identifier')
 
