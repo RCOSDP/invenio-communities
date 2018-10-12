@@ -358,7 +358,7 @@ def community_list():
     communities = Community.filter_communities(p, so)
     featured_community = FeaturedCommunity.get_featured_or_none()
     form = SearchForm(p=p)
-    per_page = 9999
+    per_page = 10
     page = max(page, 1)
     p = Pagination(page, per_page, communities.count())
 
