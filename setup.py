@@ -156,6 +156,7 @@ setup(
             'invenio_communities_js = invenio_communities.bundles:js',
             'invenio_communities_js_tree = invenio_communities.bundles:js_tree',
             'invenio_communities_js_tree_display = invenio_communities.bundles:js_tree_display',
+            'invenio_communities_js_tap = invenio_communities.bundles:community_js',
             'invenio_communities_css = invenio_communities.bundles:css',
             'invenio_communities_css_tree = invenio_communities.bundles:css_tree',
             'invenio_communities_css_tree_display = invenio_communities.bundles:css_tree_display',
