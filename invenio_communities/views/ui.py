@@ -228,15 +228,8 @@ def edit(community):
     if form.validate_on_submit():
         data = dict(
             (key, request.form.getlist(key)) for key in request.form.keys())
-        flash(data['color_bg1'])
+        flash(data['color_bg1'][0])
         flash(data)
-        # flash(data['color_bg2'])
-        # flash(data.get('color_bg1', type=int))
-        # for k,v in data.items():
-        #     flash(k)
-        #     flash(v)
-        # color_bg1 = data.get(color_bg1)
-        # flash(color_bg1)
 
 
         for field, val in form.data.items():
