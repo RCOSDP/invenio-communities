@@ -233,7 +233,7 @@ def edit(community):
         data = dict(
             (key, request.form.getlist(key)) for key in request.form.keys())
 
-        setattr(community, 'color_bg1', data['color_bg1'][0])
+        setattr(community, 'color_bg1', request.form.get('color_bg1', '#fff'))
         setattr(community, 'color_bg2', data['color_bg2'][0])
         setattr(community, 'color_frame', data['color_frame'][0])
         setattr(community, 'color_header', data['color_header'][0])
