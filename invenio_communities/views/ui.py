@@ -230,14 +230,11 @@ def edit(community):
             setattr(community, field, val)
 
         # Set color
-        data = dict(
-            (key, request.form.getlist(key)) for key in request.form.keys())
-
         setattr(community, 'color_bg1', request.form.get('color_bg1', '#fff'))
-        setattr(community, 'color_bg2', data['color_bg2'][0])
-        setattr(community, 'color_frame', data['color_frame'][0])
-        setattr(community, 'color_header', data['color_header'][0])
-        setattr(community, 'color_footer', data['color_footer'][0])
+        setattr(community, 'color_bg2', request.form.get('color_bg2', '#fff'))
+        setattr(community, 'color_frame', request.form.get('color_frame', '#ddd'))
+        setattr(community, 'color_header', request.form.get('color_header', '#f8f8f8'))
+        setattr(community, 'color_footer', request.form.get('color_footer', 'rgba(13,95,137,0.8)'))
 
         file = request.files.get('logo', None)
         if file:
