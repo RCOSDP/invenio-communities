@@ -23,6 +23,16 @@
 
 {%- extends config.COMMUNITIES_BASE_TEMPLATE -%}
 
+{%- block css %}
+  {{ super() }}
+<style>
+  .row label {
+    font-weight: normal !important;
+    font-size: 100px !important;
+  }
+</style>
+{%- endblock css %}
+
 {%- block javascript -%}
   {{ super() }}
   <script src="{{url_for('static', filename='node_modules/ckeditor/ckeditor.js')}}"></script>
