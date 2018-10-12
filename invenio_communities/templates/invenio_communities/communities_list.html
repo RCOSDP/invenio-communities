@@ -152,7 +152,7 @@
                 {%- set new_args = args.copy() -%}
                 {%- do new_args.update({'so': opt}) -%}
                 <li>
-                  <a href="{{ url_for('invenio_communities.index', **new_args) }}" class="active">
+                  <a href="{{ url_for('invenio_communities.community_list', **new_args) }}" class="active">
                     <i class="pull-right icon {{ 'glyphicon glyphicon-ok' if args.get('so', 'ranking')==opt }}"></i>
                     {{ opt }}
                   </a>
@@ -187,23 +187,25 @@
                     <h4>
                       <div class="pull-right">
                         <div class="form-group">
-                          <div class="dropdown">
-                              <button type="button" class="btn dropdown-toggle" id="dropdownMenu_View" data-toggle="dropdown">{{ _('View') }}
-                                  <span class="caret"></span>
-                              </button>
-                              <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu_View">
-                                  <li role="presentation">
-                                      <a role="menuitem" tabindex="-1" href="{{url_for('.view', community_id=obj.id, view='basic')}}">{{ _('Basic') }}</a>
-                                  </li>
-                                  <li role="presentation">
-                                      <a role="menuitem" tabindex="-1" href="{{url_for('.view', community_id=obj.id, view='weko')}}">{{ _('Weko') }}</a>
-                                  </li>
-                              </ul>
-                          </div>
+                          <!--<div class="dropdown">-->
+                              <!--<button type="button" class="btn dropdown-toggle" id="dropdownMenu_View" data-toggle="dropdown">{{ _('View') }}-->
+                                  <!--<span class="caret"></span>-->
+                              <!--</button>-->
+                              <!--<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu_View">-->
+                                  <!--<li role="presentation">-->
+                                      <!--<a role="menuitem" tabindex="-1" href="{{url_for('.view', community_id=obj.id, view='basic')}}">{{ _('Basic') }}</a>-->
+                                  <!--</li>-->
+                                  <!--<li role="presentation">-->
+                                      <!--<a role="menuitem" tabindex="-1" href="{{url_for('.view', community_id=obj.id, view='weko')}}">{{ _('Weko') }}</a>-->
+                                  <!--</li>-->
+                              <!--</ul>-->
+                          <!--</div>-->
+                          <a href="{{url_for('.view', community_id=obj.id, view='basic')}}">{{ _('Basic') }}</a>
+                          <a href="{{url_for('.view', community_id=obj.id, view='weko')}}">{{ _('Weko') }}</a>
                         </div>
-                        {% if obj.id_user == current_user.id %}
-                          <a href="{{url_for('.curate', community_id=obj.id)}}" class="btn btn-info">{{ _('Curate') }}</a>
-                        {% endif %}
+                        <!--{% if obj.id_user == current_user.id %}-->
+                          <!--<a href="{{url_for('.curate', community_id=obj.id)}}" class="btn btn-info">{{ _('Curate') }}</a>-->
+                        <!--{% endif %}-->
                       </div>
                       {{ obj.title }}
                     </h4><br />
@@ -221,18 +223,18 @@
               <li{{ ' class="disabled"'|safe if not pagination.has_prev }}>
                 {%- set new_args = args.copy() -%}
                 {%- do new_args.update({'page': 1}) -%}
-                <a title="first" href="{{ url_for('.index', **new_args) }}">&laquo;</a>
+                <a title="first" href="{{ url_for('.community_list', **new_args) }}">&laquo;</a>
               </li>
               <li{{ ' class="disabled"'|safe if not pagination.has_prev }}>
                 {%- do args.update({'page': pagination.page-1 }) -%}
-                <a title="prev" href="{{ url_for('.index', **args) }}">&lsaquo;</a>
+                <a title="prev" href="{{ url_for('.community_list', **args) }}">&lsaquo;</a>
               </li>
               {%- for page_p in pagination.iter_pages() %}
                 {%- if page_p -%}
                   {%- set new_args = args.copy() -%}
                   {%- do new_args.update({'page': page_p}) -%}
                   <li{{ ' class="active"'|safe if page_p == pagination.page }}>
-                    <a href="{{ url_for('.index', **new_args) }}">{{ page_p }}</a>
+                    <a href="{{ url_for('.community_list', **new_args) }}">{{ page_p }}</a>
                   </li>
                 {%- else -%}
                   <li class="disabled"><a href="#">...</a></li>
@@ -241,12 +243,12 @@
               <li{{ ' class="disabled"'|safe if not pagination.has_next }}>
                 {%- set new_args = args.copy() -%}
                 {%- do new_args.update({'page': pagination.page+1}) -%}
-                <a href="{{ url_for('.index', **new_args) }}">&rsaquo;</a>
+                <a href="{{ url_for('.community_list', **new_args) }}">&rsaquo;</a>
               </li>
               <li{{ ' class="disabled"'|safe if not pagination.has_next }}>
                 {%- set new_args = args.copy() -%}
                 {%- do new_args.update({'page': pagination.pages }) -%}
-                <a title="last" href="{{ url_for('.index', **new_args) }}">&raquo;</a>
+                <a title="last" href="{{ url_for('.community_list', **new_args) }}">&raquo;</a>
               </li>
             </ul>
           </div>
