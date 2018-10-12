@@ -239,6 +239,25 @@
                 {%- endif %}
               {%- endfor %}
               </fieldset>
+<!--TODO              -->
+              <fieldset>
+                <div class="form-group field-identifier">
+                  <label class="control-label col-md-3" for="identifier">
+                    <i class="icon-barcode"></i> Identifier
+                  </label>
+                  <div class="controls col-md-9">
+                    <div class="row">
+                      <div class="form-group col-sm-2">
+                        <label for="body-bg">{{_('Background1')}}</label>
+                        <input type="color" class="form-control" id="body-bg" name="body-bg" value={{ body_bg }}>
+                      </div>
+                      
+                    </div>
+                    <p class="text-muted help-block field-desc"><small>The identifier cannot be changed after creation of the community.</small></p>
+                  </div>
+                </div>
+              </fieldset>
+
             </div> <!-- /.panel-inner -->
           </div> <!-- /#collapse .panel-body -->
         </div> <!-- /.panel panel-default -->
