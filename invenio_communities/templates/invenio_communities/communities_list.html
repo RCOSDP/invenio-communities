@@ -200,8 +200,8 @@
                                   <!--</li>-->
                               <!--</ul>-->
                           <!--</div>-->
-                          <a href="{{url_for('.view', community_id=obj.id, view='basic')}}">{{ _('Basic') }}</a>
-                          <a href="{{url_for('.view', community_id=obj.id, view='weko')}}">{{ _('Weko') }}</a>
+                          <a href="{{url_for('.view', community_id=obj.id, view='basic')}}" class="btn btn-info">{{ _('Basic') }}</a>
+                          <a href="{{url_for('.view', community_id=obj.id, view='weko')}}" class="btn btn-info">{{ _('Weko') }}</a>
                         </div>
                         <!--{% if obj.id_user == current_user.id %}-->
                           <!--<a href="{{url_for('.curate', community_id=obj.id)}}" class="btn btn-info">{{ _('Curate') }}</a>-->
