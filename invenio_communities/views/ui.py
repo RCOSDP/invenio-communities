@@ -227,8 +227,8 @@ def edit(community):
 
     if form.validate_on_submit():
         data = copy.deepcopy(request.values)
-        flash(form)
-        # community_id = data.pop('identifier')
+        color_bg1 = data.pop('color_bg1')
+        flash(color_bg1)
 
 
         for field, val in form.data.items():
