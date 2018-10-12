@@ -45,6 +45,7 @@ js_tree_display = NpmBundle(
     'js/invenio_communities/inline.bundle.js',
     'js/invenio_communities/polyfills.bundle.js',
     'js/invenio_communities/main.bundle.js',
+    'js/invenio_communities/community_list.js',
     output='gen/communities_tree_display.%(version)s.js'
 )
 
