@@ -226,8 +226,9 @@ def edit(community):
     })
 
     if form.validate_on_submit():
-        data = copy.deepcopy(request.values)
-        flash(str(data.to_dict(flat=False)))
+        data = dict(
+            (key, request.form.getlist(key)) for key in request.form.keys())
+        flash(str(data))
         # flash(data['color_bg2'])
         # flash(data.get('color_bg1', type=int))
         # for k,v in data.items():
