@@ -227,7 +227,7 @@ def edit(community):
 
     if form.validate_on_submit():
         data = copy.deepcopy(request.values)
-        flash(str(data))
+        flash(str(form))
         # for k,v in data.items():
         #     flash(k)
         #     flash(v)
