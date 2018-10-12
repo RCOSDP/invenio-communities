@@ -226,14 +226,18 @@ def edit(community):
     })
 
     if form.validate_on_submit():
-        data = dict(
-            (key, request.form.getlist(key)) for key in request.form.keys())
-        flash(data['color_bg1'][0])
-        flash(data)
-
-
         for field, val in form.data.items():
             setattr(community, field, val)
+
+        # Set color
+        data = dict(
+            (key, request.form.getlist(key)) for key in request.form.keys())
+
+        setattr(community, 'color_bg1', data['color_bg1'][0])
+        setattr(community, 'color_bg2', data['color_bg2'][0])
+        setattr(community, 'color_frame', data['color_frame'][0])
+        setattr(community, 'color_header', data['color_header'][0])
+        setattr(community, 'color_footer', data['color_footer'][0])
 
         file = request.files.get('logo', None)
         if file:
