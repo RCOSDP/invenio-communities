@@ -211,7 +211,7 @@ class Community(db.Model, Timestamp):
     # root_node_id = db.Column(db.Text, nullable=False, default='')
 
     root_node_id = db.Column(
-        db.Text,
+        db.BigInteger,
         db.ForeignKey(Index.id),
         nullable=False
     )
