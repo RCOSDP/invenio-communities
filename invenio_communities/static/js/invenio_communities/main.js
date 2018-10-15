@@ -35,6 +35,8 @@ require([
                                 ['invenioSearch', 'invenioCommunities']
       );
 
+      $(".panel").addClass("weko1-panel");
+
 
     });
   });
