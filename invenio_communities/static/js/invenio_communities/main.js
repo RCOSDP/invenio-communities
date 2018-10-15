@@ -35,6 +35,6 @@ require([
                                 ['invenioSearch', 'invenioCommunities']
       );
 
-      document.getElementById("container-fluid").addClass("weko1");
+      $(".container-fluid").addClass("weko1");
     });
   });
