@@ -66,6 +66,10 @@
 {%- endblock search_results %}
 
 {% block tail %}
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js"></script>
+<script src="{{ url_for('static', filename='js/weko_admin/quill.min.js') }}"></script>
+
 <script>
   $(document).ready(function() {
     $(".container-fluid").addClass("weko1-body");
