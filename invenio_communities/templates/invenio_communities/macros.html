@@ -21,7 +21,7 @@
 # as an Intergovernmental Organization or submit itself to any jurisdiction.
 #}
 {% macro community_header(community, link=True, subtitle=None) %}
-<div class="header">
+<div class="{{community.id}}-header">
   <div class="container">
     <div class="row">
       {%- if community.community_header %}
@@ -46,7 +46,7 @@
 {% endmacro %}
 
 {% macro community_footer(community, link=True, subtitle=None) %}
-<div class="footer">
+<div class="{{community.id}}-footer">
   <div class="container">
     <div class="row">
       {%- if community.community_footer %}
