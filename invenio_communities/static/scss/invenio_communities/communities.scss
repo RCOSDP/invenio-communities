@@ -23,6 +23,8 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
  */
 
+@import "variables";
+
 $featured-community-background-color: #EEE;
 $ribbon-gradient-start-color: #2AABD2;
 $ribbon-gradient-end-color: #70e1fa;
@@ -111,13 +113,4 @@ $ribbon-gradient-end-color: #70e1fa;
   .loader .loading img, .loading img {
     display: inline;
   }
-
-  .weko1-footer {
-    background-color: darken(#8a8a8a, 40%);
-  }
-
-  .weko1-header {
-    background-color: darken(#7A9A95, 40%);
-  }
-
 }
