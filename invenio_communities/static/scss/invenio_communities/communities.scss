@@ -111,4 +111,13 @@ $ribbon-gradient-end-color: #70e1fa;
   .loader .loading img, .loading img {
     display: inline;
   }
+
+  .footer {
+    color: darken(#8a8a8a, 40%);
+  }
+
+  .header {
+    color: darken(#7A9A95, 40%);
+  }
+
 }
