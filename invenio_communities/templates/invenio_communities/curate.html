@@ -30,15 +30,15 @@
 
 {%- block page_header %}{%- endblock page_header %}
 
-{%- block css %}
-  {{ super() }}
-  {% assets "invenio_communities_css" %}<link href="{{ ASSET_URL }}" rel="stylesheet">{% endassets %}
-{%- endblock css %}
-
 {%- block javascript -%}
   {{ super() }}
   {% assets "invenio_communities_js" %}<script src="{{ ASSET_URL }}"></script>{% endassets %}
 {%- endblock javascript -%}
+
+{%- block css %}
+  {{ super() }}
+  {% assets "invenio_communities_css" %}<link href="{{ ASSET_URL }}" rel="stylesheet">{% endassets %}
+{%- endblock css %}
 
 {% block page_body %}
 <div class="communities">
