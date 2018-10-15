@@ -42,6 +42,7 @@
 
 {% block page_body %}
 <div class="communities">
+  <div id="community-id" name="community-id" value={{ community.id }} hidden></div>
   {{ community_header(community, subtitle='Pending Requests') }}
   {{super()}}
   {{ community_footer(community, subtitle='Pending Requests') }}
@@ -72,7 +73,7 @@
 
 <script>
   $(document).ready(function() {
-    
+
 
   })
 </script>

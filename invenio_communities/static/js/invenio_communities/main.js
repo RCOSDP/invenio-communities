@@ -35,9 +35,9 @@ require([
                                 ['invenioSearch', 'invenioCommunities']
       );
 
-      $(".container-fluid").addClass("weko1-body");
-      $(".panel").addClass("weko1-panel");
-
+      communityId = $('#community-id').val()
+      $(".container-fluid").addClass(communityId + "-body");
+      $(".panel").addClass(communityId + "-panel");
 
     });
   });
