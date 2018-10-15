@@ -35,6 +35,7 @@ require([
                                 ['invenioSearch', 'invenioCommunities']
       );
 
+      $(".container-fluid").addClass("weko1-body");
       $(".panel").addClass("weko1-panel");
 
 
