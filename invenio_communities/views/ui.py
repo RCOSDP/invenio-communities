@@ -338,6 +338,7 @@ def curate(community):
         return jsonify({'status': 'success'})
 
     ctx = {'community': community}
+    current_app.logger.debug(ctx)
     return render_template(
         current_app.config['COMMUNITIES_CURATE_TEMPLATE'],
         **ctx
