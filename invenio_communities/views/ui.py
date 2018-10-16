@@ -355,6 +355,25 @@ def delete(community):
     })
 
     if deleteform.validate_on_submit():
+
+# TODO
+        fn = community.id + '.scss'
+        scss_file = os.path.join(current_app.static_folder,
+                                 'scss/invenio_communities/communities/' + fn)
+        os.remove(scss_file)
+
+        var_file = os.path.join(current_app.static_folder,
+                                'scss/invenio_communities/variables.scss')
+
+        # Delete from variables
+        key = '@import "communities/' + community.id + '";'
+        with open(var_file, "r") as vf:
+            lines = vf.readlines()
+            lines.remove(key + '\n')
+            with open(var_file, "w") as new_vf:
+                for line in lines:
+                    new_vf.write(line)
+
         community.delete()
         db.session.commit()
         flash("Community was deleted.", category='success')
