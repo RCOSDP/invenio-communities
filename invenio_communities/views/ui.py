@@ -215,6 +215,28 @@ def new():
 @permission_required('community-edit')
 def edit(community):
     """Create or edit a community."""
+    def read_color(scss_file, community):
+        with open(scss_file, 'r', encoding='utf-8') as fp:
+            for line in fp.readlines():
+                line = line.strip()if line else ''
+                if line.startswith('$weko-community-body-bg:'):
+                    community.color_bg1 = line[line.find('#'):-1]
+                if line.startswith('$weko-community-panel-bg:'):
+                    community.color_bg2 = line[line.find('#'):-1]
+                if line.startswith('$weko-community-panel-border:'):
+                    community.color_frame = line[line.find('#'):-1]
+                if line.startswith('$weko-community-header-bg:'):
+                    community.color_header = line[line.find('#'):-1]
+                if line.startswith('$weko-community-footer-bg:'):
+                    community.color_footer = line[line.find('#'):-1]
+
+        return community
+
+    fn = community.id + '.scss'
+    scss_file = os.path.join(current_app.static_folder,
+                             'scss/invenio_communities/communities/' + fn)
+    read_color(scss_file, community)
+
     form = EditCommunityForm(formdata=request.values, obj=community)
     deleteform = DeleteCommunityForm()
     ctx = mycommunities_ctx()
@@ -230,26 +252,28 @@ def edit(community):
             setattr(community, field, val)
 
         # Set color
-        # setattr(community, 'color_bg1', request.form.get('color_bg1', '#fff'))
-        # setattr(community, 'color_bg2', request.form.get('color_bg2', '#fff'))
-        # setattr(community, 'color_frame', request.form.get('color_frame', '#ddd'))
-        # setattr(community, 'color_header', request.form.get('color_header', '#f8f8f8'))
-        # setattr(community, 'color_footer', request.form.get('color_footer', 'rgba(13,95,137,0.8)'))
         color_bg1 = request.form.get('color_bg1', '#fff')
         color_bg2 = request.form.get('color_bg2', '#fff')
         color_frame = request.form.get('color_frame', '#ddd')
         color_header = request.form.get('color_header', '#f8f8f8')
         color_footer = request.form.get('color_footer', 'rgba(13,95,137,0.8)')
 
-        fn = community.id + '.scss'
-        scss_file = os.path.join(current_app.static_folder,
-                                 'scss/invenio_communities/communities/' + fn)
         lines = []
-        lines.append('.communities {.' + community.id + '-body {background-color: ' + color_bg1 + ';}}')
-        lines.append('.communities {.' + community.id + '-panel {background-color: ' + color_bg2 + ';}}')
-        lines.append('.communities {.' + community.id + '-panel {border-color: ' + color_frame + ';}}')
-        lines.append('.communities {.' + community.id + '-header {background-color: ' + color_header + ';}}')
-        lines.append('.communities {.' + community.id + '-footer {background-color: ' + color_footer + ';}}')
+        lines.append('$weko-community-body-bg: ' + color_bg1 + ';')
+        lines.append('$weko-community-panel-bg: ' + color_bg2 + ';')
+        lines.append('$weko-community-panel-border: ' + color_frame + ';')
+        lines.append('$weko-community-header-bg: ' + color_header + ';')
+        lines.append('$weko-community-footer-bg: ' + color_footer + ';')
+        lines.append('.communities {.' + community.id +
+                     '-body {background-color: $weko-community-body-bg;}}')
+        lines.append('.communities {.' + community.id +
+                     '-panel {background-color: $weko-community-panel-bg;}}')
+        lines.append('.communities {.' + community.id +
+                     '-panel {border-color: $weko-community-panel-border;}}')
+        lines.append('.communities {.' + community.id +
+                     '-header {background-color: $weko-community-header-bg;}}')
+        lines.append('.communities {.' + community.id +
+                     '-footer {background-color: $weko-community-footer-bg;}}')
 
         with open(scss_file, 'w', encoding='utf-8') as fp:
             fp.writelines('\n'.join(lines))
