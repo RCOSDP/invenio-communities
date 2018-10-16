@@ -26,7 +26,7 @@
 
 from __future__ import absolute_import, print_function
 
-import copy
+import copy, os
 from functools import wraps
 
 from flask import Blueprint, abort, current_app, flash, jsonify, redirect, \
@@ -230,11 +230,29 @@ def edit(community):
             setattr(community, field, val)
 
         # Set color
-        setattr(community, 'color_bg1', request.form.get('color_bg1', '#fff'))
-        setattr(community, 'color_bg2', request.form.get('color_bg2', '#fff'))
-        setattr(community, 'color_frame', request.form.get('color_frame', '#ddd'))
-        setattr(community, 'color_header', request.form.get('color_header', '#f8f8f8'))
-        setattr(community, 'color_footer', request.form.get('color_footer', 'rgba(13,95,137,0.8)'))
+        # setattr(community, 'color_bg1', request.form.get('color_bg1', '#fff'))
+        # setattr(community, 'color_bg2', request.form.get('color_bg2', '#fff'))
+        # setattr(community, 'color_frame', request.form.get('color_frame', '#ddd'))
+        # setattr(community, 'color_header', request.form.get('color_header', '#f8f8f8'))
+        # setattr(community, 'color_footer', request.form.get('color_footer', 'rgba(13,95,137,0.8)'))
+        color_bg1 = request.form.get('color_bg1', '#fff')
+        color_bg2 = request.form.get('color_bg2', '#fff')
+        color_frame = request.form.get('color_frame', '#ddd')
+        color_header = request.form.get('color_header', '#f8f8f8')
+        color_footer = request.form.get('color_footer', 'rgba(13,95,137,0.8)')
+
+        fn = community.id + '.scss'
+        scss_file = os.path.join(current_app.static_folder,
+                                 'scss/invenio_communities/communities/' + fn)
+        lines = []
+        lines.append('.communities {.' + community.id + '-body {background-color: ' + color_bg1 + ';}}')
+        lines.append('.communities {.' + community.id + '-panel {background-color: ' + color_bg2 + ';}}')
+        lines.append('.communities {.' + community.id + '-panel {border-color: ' + color_frame + ';}}')
+        lines.append('.communities {.' + community.id + '-header {background-color: ' + color_header + ';}}')
+        lines.append('.communities {.' + community.id + '-footer {background-color: ' + color_footer + ';}}')
+
+        with open(scss_file, 'w', encoding='utf-8') as fp:
+            fp.writelines('\n'.join(lines))
 
         file = request.files.get('logo', None)
         if file:
