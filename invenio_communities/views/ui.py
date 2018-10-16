@@ -193,24 +193,31 @@ def new():
         fn = community_id + '.scss'
         scss_file = os.path.join(current_app.static_folder,
                                  'scss/invenio_communities/communities/' + fn)
+        # Get color
+        color_bg1 = request.form.get('color_bg1', '#fff')
+        color_bg2 = request.form.get('color_bg2', '#fff')
+        color_frame = request.form.get('color_frame', '#ddd')
+        color_header = request.form.get('color_header', '#f8f8f8')
+        color_footer = request.form.get('color_footer', 'rgba(13,95,137,0.8)')
 
         # Write scss
         lines = []
-        lines.append('$weko-community-body-bg: #fff;')
-        lines.append('$weko-community-panel-bg: #fff;')
-        lines.append('$weko-community-panel-border: #ddd;')
-        lines.append('$weko-community-header-bg: #f8f8f8;')
-        lines.append('$weko-community-footer-bg: rgba(13,95,137,0.8);')
+        lines.append('$' + community_id + '-community-body-bg: ' + color_bg1 + ';')
+        lines.append('$' + community_id + '-community-panel-bg: ' + color_bg2 + ';')
+        lines.append('$' + community_id + '-community-panel-border: ' + color_frame + ';')
+        lines.append('$' + community_id + '-community-header-bg: ' + color_header + ';')
+        lines.append('$' + community_id + '-community-footer-bg: ' + color_footer + ';')
+
         lines.append('.communities {.' + community.id +
-                     '-body {background-color: $weko-community-body-bg;}}')
+                     '-body {background-color: $' + community_id + '-community-body-bg;}}')
         lines.append('.communities {.' + community.id +
-                     '-panel {background-color: $weko-community-panel-bg;}}')
+                     '-panel {background-color: $' + community_id + '-community-panel-bg;}}')
         lines.append('.communities {.' + community.id +
-                     '-panel {border-color: $weko-community-panel-border;}}')
+                     '-panel {border-color: $' + community_id + '-community-panel-border;}}')
         lines.append('.communities {.' + community.id +
-                     '-header {background-color: $weko-community-header-bg;}}')
+                     '-header {background-color: $' + community_id + '-community-header-bg;}}')
         lines.append('.communities {.' + community.id +
-                     '-footer {background-color: $weko-community-footer-bg;}}')
+                     '-footer {background-color: $' + community_id + '-community-footer-bg;}}')
 
         with open(scss_file, 'w', encoding='utf-8') as fp:
             fp.writelines('\n'.join(lines))
@@ -255,15 +262,15 @@ def edit(community):
         with open(scss_file, 'r', encoding='utf-8') as fp:
             for line in fp.readlines():
                 line = line.strip()if line else ''
-                if line.startswith('$weko-community-body-bg:'):
+                if line.startswith('$' + community.id + '-community-body-bg:'):
                     community.color_bg1 = line[line.find('#'):-1]
-                if line.startswith('$weko-community-panel-bg:'):
+                if line.startswith('$' + community.id + '-community-panel-bg:'):
                     community.color_bg2 = line[line.find('#'):-1]
-                if line.startswith('$weko-community-panel-border:'):
+                if line.startswith('$' + community.id + '-community-panel-border:'):
                     community.color_frame = line[line.find('#'):-1]
-                if line.startswith('$weko-community-header-bg:'):
+                if line.startswith('$' + community.id + '-community-header-bg:'):
                     community.color_header = line[line.find('#'):-1]
-                if line.startswith('$weko-community-footer-bg:'):
+                if line.startswith('$' + community.id + '-community-footer-bg:'):
                     community.color_footer = line[line.find('#'):-1]
 
         return community
@@ -296,21 +303,21 @@ def edit(community):
 
         # Write scss
         lines = []
-        lines.append('$weko-community-body-bg: ' + color_bg1 + ';')
-        lines.append('$weko-community-panel-bg: ' + color_bg2 + ';')
-        lines.append('$weko-community-panel-border: ' + color_frame + ';')
-        lines.append('$weko-community-header-bg: ' + color_header + ';')
-        lines.append('$weko-community-footer-bg: ' + color_footer + ';')
+        lines.append('$' + community.id + '-community-body-bg: ' + color_bg1 + ';')
+        lines.append('$' + community.id + '-community-panel-bg: ' + color_bg2 + ';')
+        lines.append('$' + community.id + '-community-panel-border: ' + color_frame + ';')
+        lines.append('$' + community.id + '-community-header-bg: ' + color_header + ';')
+        lines.append('$' + community.id + '-community-footer-bg: ' + color_footer + ';')
         lines.append('.communities {.' + community.id +
-                     '-body {background-color: $weko-community-body-bg;}}')
+                     '-body {background-color: $' + community.id + '-community-body-bg;}}')
         lines.append('.communities {.' + community.id +
-                     '-panel {background-color: $weko-community-panel-bg;}}')
+                     '-panel {background-color: $' + community.id + '-community-panel-bg;}}')
         lines.append('.communities {.' + community.id +
-                     '-panel {border-color: $weko-community-panel-border;}}')
+                     '-panel {border-color: $' + community.id + '-community-panel-border;}}')
         lines.append('.communities {.' + community.id +
-                     '-header {background-color: $weko-community-header-bg;}}')
+                     '-header {background-color: $' + community.id + '-community-header-bg;}}')
         lines.append('.communities {.' + community.id +
-                     '-footer {background-color: $weko-community-footer-bg;}}')
+                     '-footer {background-color: $' + community.id + '-community-footer-bg;}}')
 
         with open(scss_file, 'w', encoding='utf-8') as fp:
             fp.writelines('\n'.join(lines))
