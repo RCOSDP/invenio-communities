@@ -25,7 +25,7 @@
   <div class="container">
     <div class="row">
       {%- if community.community_header %}
-        <div id="wysiwyg_header">{{ community.community_header|safe }}</div>
+        <div id="wysiwyg_header" class="col-md-12">{{ community.community_header|safe }}</div>
       {% else %}
         <div class="col-md-12">
           <h1>
