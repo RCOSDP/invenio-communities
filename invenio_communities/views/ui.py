@@ -188,6 +188,42 @@ def new():
         community = Community.create(
             community_id, current_user.get_id(), **data)
 
+# TODO
+        # Create scss
+        fn = community_id + '.scss'
+        scss_file = os.path.join(current_app.static_folder,
+                                 'scss/invenio_communities/communities/' + fn)
+
+        # Write scss
+        lines = []
+        lines.append('$weko-community-body-bg: #fff;')
+        lines.append('$weko-community-panel-bg: #fff;')
+        lines.append('$weko-community-panel-border: #ddd;')
+        lines.append('$weko-community-header-bg: #f8f8f8;')
+        lines.append('$weko-community-footer-bg: rgba(13,95,137,0.8);')
+        lines.append('.communities {.' + community.id +
+                     '-body {background-color: $weko-community-body-bg;}}')
+        lines.append('.communities {.' + community.id +
+                     '-panel {background-color: $weko-community-panel-bg;}}')
+        lines.append('.communities {.' + community.id +
+                     '-panel {border-color: $weko-community-panel-border;}}')
+        lines.append('.communities {.' + community.id +
+                     '-header {background-color: $weko-community-header-bg;}}')
+        lines.append('.communities {.' + community.id +
+                     '-footer {background-color: $weko-community-footer-bg;}}')
+
+        with open(scss_file, 'w', encoding='utf-8') as fp:
+            fp.writelines('\n'.join(lines))
+
+        # Add to variables
+        var_file = os.path.join(current_app.static_folder,
+                                 'scss/invenio_communities/variables.scss')
+        with open(var_file, 'a', encoding='utf-8') as fp:
+            str = '@import "communities/' + community_id + '";'
+            fp.writelines('\n'.join(str))
+
+
+
         file = request.files.get('logo', None)
         if file:
             if not community.save_logo(file.stream, file.filename):
@@ -208,7 +244,7 @@ def new():
         **ctx
     )
 
-
+# TODO
 @blueprint.route('/<string:community_id>/edit/', methods=['GET', 'POST'])
 @login_required
 @pass_community
@@ -251,13 +287,14 @@ def edit(community):
         for field, val in form.data.items():
             setattr(community, field, val)
 
-        # Set color
+        # Get color
         color_bg1 = request.form.get('color_bg1', '#fff')
         color_bg2 = request.form.get('color_bg2', '#fff')
         color_frame = request.form.get('color_frame', '#ddd')
         color_header = request.form.get('color_header', '#f8f8f8')
         color_footer = request.form.get('color_footer', 'rgba(13,95,137,0.8)')
 
+        # Write scss
         lines = []
         lines.append('$weko-community-body-bg: ' + color_bg1 + ';')
         lines.append('$weko-community-panel-bg: ' + color_bg2 + ';')
