@@ -197,20 +197,20 @@ class Community(db.Model, Timestamp):
     community_footer = db.Column(db.Text, nullable=False, default='')
     """Footer design of community, displayed in portal boxes."""
 
-    color_bg1 = db.Column(db.Text, nullable=False, default='')
-    """Background color of community, displayed in portal boxes."""
-
-    color_bg2 = db.Column(db.Text, nullable=False, default='')
-    """Background color of community, displayed in portal boxes."""
-
-    color_frame = db.Column(db.Text, nullable=False, default='')
-    """Frame color of community, displayed in portal boxes."""
-
-    color_header = db.Column(db.Text, nullable=False, default='')
-    """Header color of community, displayed in portal boxes."""
-
-    color_footer = db.Column(db.Text, nullable=False, default='')
-    """Footer color of community, displayed in portal boxes."""
+    # color_bg1 = db.Column(db.Text, nullable=False, default='')
+    # """Background color of community, displayed in portal boxes."""
+    #
+    # color_bg2 = db.Column(db.Text, nullable=False, default='')
+    # """Background color of community, displayed in portal boxes."""
+    #
+    # color_frame = db.Column(db.Text, nullable=False, default='')
+    # """Frame color of community, displayed in portal boxes."""
+    #
+    # color_header = db.Column(db.Text, nullable=False, default='')
+    # """Header color of community, displayed in portal boxes."""
+    #
+    # color_footer = db.Column(db.Text, nullable=False, default='')
+    # """Footer color of community, displayed in portal boxes."""
 
     last_record_accepted = db.Column(
         db.DateTime(), nullable=False, default=datetime(2000, 1, 1, 0, 0, 0))
