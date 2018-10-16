@@ -220,7 +220,7 @@ def new():
                                  'scss/invenio_communities/variables.scss')
         with open(var_file, 'a', encoding='utf-8') as fp:
             str = '@import "communities/' + community_id + '";'
-            fp.writelines('\n'.join(str))
+            fp.writelines(str + '\n')
 
 
 
