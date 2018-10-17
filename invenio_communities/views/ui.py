@@ -217,7 +217,6 @@ def new():
         community = Community.create(
             community_id, current_user.get_id(), root_index_id, **data)
 
-# TODO
         # Default color
         community.color_bg1 = request.form.get('color_bg1', '#ffffff')
         community.color_bg2 = request.form.get('color_bg2', '#ffffff')
@@ -280,7 +279,6 @@ def new():
         **ctx
     )
 
-# TODO
 @blueprint.route('/<string:community_id>/edit/', methods=['GET', 'POST'])
 @login_required
 @pass_community
@@ -384,8 +382,6 @@ def delete(community):
     })
 
     if deleteform.validate_on_submit():
-
-# TODO
         fn = community.id + '.scss'
         scss_file = os.path.join(current_app.static_folder,
                                  'scss/invenio_communities/communities/' + fn)

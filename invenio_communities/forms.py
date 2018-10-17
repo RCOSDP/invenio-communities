@@ -40,7 +40,7 @@ class CommunityForm(Form):
     field_sets = [
         ('Information',
          ['identifier', 'title', 'description', 'curation_policy', 'page',
-          'community_header', 'community_footer','logo','index_checked_nodeId' , ],
+          'community_header', 'community_footer','logo','index_checked_nodeId', ],
          {'classes': 'in'}),
     ]
 

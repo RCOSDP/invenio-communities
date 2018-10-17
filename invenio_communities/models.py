@@ -191,7 +191,7 @@ class Community(db.Model, Timestamp):
 
     curation_policy = db.Column(db.Text(), nullable=False, default='')
     """Community curation policy."""
-# TODO
+
     community_header = db.Column(db.Text, nullable=False, default='')
     """Header design of community, displayed in portal boxes."""
 
