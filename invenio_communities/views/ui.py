@@ -219,11 +219,11 @@ def new():
 
 # TODO
         # Default color
-        community.color_bg1 = '#ffffff'
-        community.color_bg2 = '#ffffff'
-        community.color_frame = '#dddddd'
-        community.color_header = '#0d5f89'
-        community.color_footer = '#0d5f89'
+        community.color_bg1 = request.form.get('color_bg1', '#ffffff')
+        community.color_bg2 = request.form.get('color_bg2', '#ffffff')
+        community.color_frame = request.form.get('color_frame', '#dddddd')
+        community.color_header = request.form.get('color_header', '#0d5f89')
+        community.color_footer = request.form.get('color_footer', '#0d5f89')
 
         # Create scss
         fn = community_id + '.scss'
@@ -324,11 +324,11 @@ def edit(community):
             setattr(community, field, val)
 
         # Get color
-        color_bg1 = request.form.get('color_bg1', '#fff')
-        color_bg2 = request.form.get('color_bg2', '#fff')
-        color_frame = request.form.get('color_frame', '#ddd')
-        color_header = request.form.get('color_header', '#f8f8f8')
-        color_footer = request.form.get('color_footer', 'rgba(13,95,137,0.8)')
+        color_bg1 = request.form.get('color_bg1', '#ffffff')
+        color_bg2 = request.form.get('color_bg2', '#ffffff')
+        color_frame = request.form.get('color_frame', '#dddddd')
+        color_header = request.form.get('color_header', '#0d5f89')
+        color_footer = request.form.get('color_footer', '#0d5f89')
 
         # Write scss
         lines = []
