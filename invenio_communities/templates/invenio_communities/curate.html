@@ -23,30 +23,31 @@
 
 {% extends config.SEARCH_UI_SEARCH_TEMPLATE %}
 
-{%- from "invenio_communities/macros.html" import community_header %}
+{%- from "invenio_communities/macros.html" import community_header, community_footer %}
 
-{% set title = community.title + " | " + config.THEME_SITENAME %}
-{% set search_hidden_params = {"provisional_communities": community.id} %}
+<!--{% set title = community.title + " | " + config.THEME_SITENAME %}-->
+<!--{% set search_hidden_params = {"provisional_communities": community.id} %}-->
 
-{%- block page_header %}
-{% set search_input_placeholder = "Search " + community.title %}
-{% include "invenio_search_ui/header.html" %}
-{%- endblock page_header %}
-
-{%- block css %}
-  {{ super() }}
-  {% assets "invenio_communities_css" %}<link href="{{ ASSET_URL }}" rel="stylesheet">{% endassets %}
-{%- endblock css %}
+{%- block page_header %}{%- endblock page_header %}
 
 {%- block javascript -%}
   {{ super() }}
   {% assets "invenio_communities_js" %}<script src="{{ ASSET_URL }}"></script>{% endassets %}
 {%- endblock javascript -%}
 
+{%- block css %}
+  {{ super() }}
+  {% assets "invenio_communities_css" %}<link href="{{ ASSET_URL }}" rel="stylesheet">{% endassets %}
+{%- endblock css %}
+
 {% block page_body %}
 <div class="communities">
+  <div id="community-id" name="community-id" hidden>{{ community.id }}</div>
   {{ community_header(community, subtitle='Pending Requests') }}
   {{super()}}
+  {{ community_footer(community, subtitle='Pending Requests') }}
+</div>
+<div class="communities">
 </div>
 {% endblock page_body %}
 
@@ -56,6 +57,8 @@
 </div>
 {%- endblock body_inner %}
 
+{%- block page_footer %}{%- endblock page_footer %}
+
 {%- block search_results %}
 <invenio-search-results-provisional
  template="{{ url_for('static', filename=config.COMMUNITIES_JSTEMPLATE_RESULTS_CURATE) }}"
@@ -63,3 +66,15 @@
 </invenio-search-results-provisional>
 {%- endblock search_results %}
 
+{% block tail %}
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js"></script>
+<script src="{{ url_for('static', filename='js/weko_admin/quill.min.js') }}"></script>
+
+<script>
+  $(document).ready(function() {
+
+
+  })
+</script>
+{% endblock %}
