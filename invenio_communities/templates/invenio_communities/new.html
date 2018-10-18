@@ -35,6 +35,9 @@
       font-weight: normal !important;
       font-size: 85% !important;
     }
+    .body-container {
+      max-width: 80% !important;
+    }
   </style>
 {%- endblock css %}
 
@@ -92,7 +95,7 @@
 {%- endblock javascript -%}
 
 {% block page_body %}
-<div class="container body-container">
+<div class="container-fluid body-container">
   {% if not is_new %}
   <div id="deletemodal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="deletemodal_label" aria-hidden="true">
     <div class="modal-dialog">
@@ -149,7 +152,7 @@
         </div>
       </div>
     </div>
-    <div id="file_container" class="col-md-5">
+    <div id="file_container" class="col-md-6">
       <form method="POST" id="edit_form" class="form-horizontal" enctype="multipart/form-data" role="form">
       {{form.csrf_token}}
       <div class="panel-group">
@@ -341,7 +344,7 @@
       </div>
       </form>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
       {% include "invenio_communities/mycommunities.html" %}
     </div>
   </div> <!-- /.row -->
