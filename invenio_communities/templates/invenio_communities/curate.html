@@ -41,7 +41,7 @@
 {%- endblock css %}
 
 {% block page_body %}
-<div class="communities">
+<div class="container-fluid">
   <div id="community-id" name="community-id" hidden>{{ community.id }}</div>
   {{ community_header(community, subtitle='Pending Requests') }}
   {{super()}}
