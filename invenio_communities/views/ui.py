@@ -145,9 +145,10 @@ def view(community):
             community, current_app.config['COMMUNITIES_DETAIL_TEMPLATE'])
 
     ctx = {'community': community}
+    community_id = community.id
     return render_template(
         current_app.config['COMMUNITIES_CURATE_TEMPLATE'],
-        **ctx
+        community_id=community_id, **ctx
     )
 
 
@@ -446,10 +447,10 @@ def curate(community):
         return jsonify({'status': 'success'})
 
     ctx = {'community': community}
-    current_app.logger.debug(ctx)
+    community_id = community.id
     return render_template(
         current_app.config['COMMUNITIES_CURATE_TEMPLATE'],
-        **ctx
+        community_id=community_id, **ctx
     )
 @blueprint.route('/list/', methods=['GET', ])
 def community_list():
