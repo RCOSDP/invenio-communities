@@ -21,8 +21,8 @@
 # as an Intergovernmental Organization or submit itself to any jurisdiction.
 #}
 {% macro community_header(community, link=True, subtitle=None) %}
-<div class="{{ community.id }}-header">
-  <div class="container">
+<div class="container-fluid community-default">
+  <div class="{{ community.id }}-header">
     <div class="row">
       {%- if community.community_header %}
         <div id="wysiwyg_header" class="col-md-12">{{ community.community_header|safe }}</div>
@@ -30,7 +30,7 @@
         <div class="col-md-12">
           <h1>
             {%- if link %}
-            <a href="{{ url_for('.detail', community_id=community.id) }}">{{community.title}}</a>
+            <a href="{{ url_for('.detail', community_id=community.id) }}" style="color: #ffffff;">{{community.title}}</a>
             {% else %}
             {{community.title}}
             {%- endif %}
@@ -46,26 +46,22 @@
 {% endmacro %}
 
 {% macro community_footer(community, link=True, subtitle=None) %}
-<div class="{{ community.id }}-footer">
-  <div class="container">
+<div class="container-fluid community-default">
+  <div class="{{ community.id }}-footer">
+    {%- if community.community_footer %}
     <div class="row">
-      {%- if community.community_footer %}
-        <div id="wysiwyg_footer" class="col-md-12">{{ community.community_footer|safe }}</div>
-      {% else %}
-        <div class="col-md-12">
-          <h1>
-            {%- if link %}
-            <a href="{{ url_for('.detail', community_id=community.id) }}">{{community.title}}</a>
-            {% else %}
-            {{community.title}}
-            {%- endif %}
-            {%- if subtitle %}
-            <small>{{subtitle}}</small>
-            {%- endif %}
-          </h1>
-        </div>
-      {%- endif %}
+      <div id="wysiwyg_footer" class="col-md-12">{{ community.community_footer|safe }}</div>
     </div>
+    {% else %}
+    <div class="row">
+      <div class="col-xs-12"><hr /></div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 text-center-xs" style="color: #ffffff;">
+        {% trans link="http://inveniosoftware.org" %}<p>Powered by <a href="{{link}}" style="color: #ffffff;">CERN Data Centre & Invenio</a><p>{% endtrans %}
+      </div>
+    </div>
+    {%- endif %}
   </div>
 </div>
 {% endmacro %}
