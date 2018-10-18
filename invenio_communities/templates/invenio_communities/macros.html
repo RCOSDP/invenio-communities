@@ -46,8 +46,8 @@
 {% endmacro %}
 
 {% macro community_footer(community, link=True, subtitle=None) %}
-<div class="{{ community.id }}-footer">
-  <div class="container-fluid">
+<div class="container-fluid">
+  <div class="{{ community.id }}-footer">
     <div class="row">
       {%- if community.community_footer %}
         <div id="wysiwyg_footer" class="col-md-12">{{ community.community_footer|safe }}</div>
