@@ -72,6 +72,7 @@
                   ['Undo','Redo','-','Find','Replace','-', 'RemoveFormat'],
                   ['Mathjax', 'SpecialChar', 'ScientificChar'],
                   ['Styles', 'Format'], ['Source'], ['Maximize'],
+                  ['alignment:left'], ['alignment:right'], ['alignment:center'], ['alignment:justify'],
               ],
               extraPlugins: 'blockquote,mathjax,base64image', //scientificchar,
               disableNativeSpellChecker: false,
@@ -286,7 +287,7 @@
                     <div class="row">
                       <div class="col-sm-12">
                         <div class="form-group col-sm-3">
-                          <label class="sub-label" for="body-bg">{{_('Background1')}}</label>
+                          <label class="sub-label" for="body-bg">{{_('Body')}}</label>
                           {% if community.color_bg1 %}
                             <input type="color" class="form-control color_bg1" name="color_bg1" value={{ community.color_bg1 }}>
                           {% else %}
@@ -294,7 +295,7 @@
                           {% endif %}
                         </div>
                         <div class="form-group col-sm-3">
-                          <label class="sub-label" for="panel-bg">{{_('Background2')}}</label>
+                          <label class="sub-label" for="panel-bg">{{_('Panel')}}</label>
                           {% if community.color_bg2 %}
                             <input type="color" class="form-control color_bg2" name="color_bg2" value={{ community.color_bg2 }}>
                           {% else %}
@@ -302,7 +303,7 @@
                           {% endif %}
                         </div>
                         <div class="form-group col-sm-3">
-                          <label class="sub-label" for="panel-default-border">{{_('Frame Border')}}</label>
+                          <label class="sub-label" for="panel-default-border">{{_('Border')}}</label>
                           {% if community.color_frame %}
                             <input type="color" class="form-control color_frame" name="color_frame" value={{ community.color_frame }}>
                           {% else %}
