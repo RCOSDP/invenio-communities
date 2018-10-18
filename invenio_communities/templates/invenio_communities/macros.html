@@ -57,7 +57,7 @@
             {%- if link %}
             <a href="{{ url_for('.detail', community_id=community.id) }}">{{community.title}}</a>
             {% else %}
-            {% trans link="http://inveniosoftware.org" %}Powered by <a href="{{link}}">Invenio</a>{% endtrans %}
+            {% trans link="http://inveniosoftware.org" %}<p>Powered by <a href="{{link}}" style="color: #ffffff;">CERN Data Centre & Invenio</a><p>{% endtrans %}
             {%- endif %}
             {%- if subtitle %}
             <small>{{subtitle}}</small>
