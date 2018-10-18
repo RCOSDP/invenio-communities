@@ -53,16 +53,16 @@
         <div id="wysiwyg_footer" class="col-md-12">{{ community.community_footer|safe }}</div>
       {% else %}
         <div class="col-md-12 text-center-xs">
-          <!--<h1>-->
+          <h1>
             {%- if link %}
             <a href="{{ url_for('.detail', community_id=community.id) }}">{{community.title}}</a>
             {% else %}
-            {% trans link="http://inveniosoftware.org" %}<p>Powered by <a href="{{link}}" style="color: #ffffff;">CERN Data Centre & Invenio</a><p>{% endtrans %}
+            <small>{% trans link="http://inveniosoftware.org" %}<p>Powered by <a href="{{link}}" style="color: #ffffff;">CERN Data Centre & Invenio</a><p>{% endtrans %}</small>
             {%- endif %}
             {%- if subtitle %}
             <small>{{subtitle}}</small>
             {%- endif %}
-          <!--</h1>-->
+          </h1>
         </div>
       {%- endif %}
     </div>
