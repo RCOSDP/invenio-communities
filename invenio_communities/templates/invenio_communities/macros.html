@@ -53,7 +53,7 @@
         <div id="wysiwyg_footer" class="col-md-12">{{ community.community_footer|safe }}</div>
       {% else %}
         <div class="col-md-12 text-center-xs">
-          <h1>
+          <!--<h1>-->
             {%- if link %}
             <a href="{{ url_for('.detail', community_id=community.id) }}">{{community.title}}</a>
             {% else %}
@@ -62,7 +62,7 @@
             {%- if subtitle %}
             <small>{{subtitle}}</small>
             {%- endif %}
-          </h1>
+          <!--</h1>-->
         </div>
       {%- endif %}
     </div>
