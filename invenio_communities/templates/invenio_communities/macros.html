@@ -22,7 +22,7 @@
 #}
 {% macro community_header(community, link=True, subtitle=None) %}
 <div class="{{ community.id }}-header">
-  <div class="container">
+  <div class="container-fluid">
     <div class="row">
       {%- if community.community_header %}
         <div id="wysiwyg_header" class="col-md-12">{{ community.community_header|safe }}</div>
@@ -47,7 +47,7 @@
 
 {% macro community_footer(community, link=True, subtitle=None) %}
 <div class="{{ community.id }}-footer">
-  <div class="container">
+  <div class="container-fluid">
     <div class="row">
       {%- if community.community_footer %}
         <div id="wysiwyg_footer" class="col-md-12">{{ community.community_footer|safe }}</div>
