@@ -21,8 +21,8 @@
 # as an Intergovernmental Organization or submit itself to any jurisdiction.
 #}
 {% macro community_header(community, link=True, subtitle=None) %}
-<div class="{{ community.id }}-header">
-  <div class="container-fluid">
+<div class="container-fluid">
+  <div class="{{ community.id }}-header">
     <div class="row">
       {%- if community.community_header %}
         <div id="wysiwyg_header" class="col-md-12">{{ community.community_header|safe }}</div>
