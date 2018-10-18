@@ -81,6 +81,10 @@
               removeButtons: '',
               mathJaxLib: '{{config.THEME_MATHJAX_CDN}}'
           });
+          CKEDITOR.replace( 'textarea_id', {
+            // Load the German interface.
+            language: 'en'
+          });
       }
   }
   init_ckeditor("page", 'advanced');
