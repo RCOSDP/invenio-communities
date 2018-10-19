@@ -287,19 +287,67 @@ def new():
 def edit(community):
     """Create or edit a community."""
     def read_color(scss_file, community):
-        with open(scss_file, 'r', encoding='utf-8') as fp:
-            for line in fp.readlines():
-                line = line.strip()if line else ''
-                if line.startswith('$' + community.id + '-community-body-bg:'):
-                    community.color_bg1 = line[line.find('#'):-1]
-                if line.startswith('$' + community.id + '-community-panel-bg:'):
-                    community.color_bg2 = line[line.find('#'):-1]
-                if line.startswith('$' + community.id + '-community-panel-border:'):
-                    community.color_frame = line[line.find('#'):-1]
-                if line.startswith('$' + community.id + '-community-header-bg:'):
-                    community.color_header = line[line.find('#'):-1]
-                if line.startswith('$' + community.id + '-community-footer-bg:'):
-                    community.color_footer = line[line.find('#'):-1]
+        # Read
+        if os.path.exists(scss_file):
+            with open(scss_file, 'r', encoding='utf-8') as fp:
+                for line in fp.readlines():
+                    line = line.strip() if line else ''
+                    if line.startswith(
+                        '$' + community.id + '-community-body-bg:'):
+                        community.color_bg1 = line[line.find('#'):-1]
+                    if line.startswith(
+                        '$' + community.id + '-community-panel-bg:'):
+                        community.color_bg2 = line[line.find('#'):-1]
+                    if line.startswith(
+                        '$' + community.id + '-community-panel-border:'):
+                        community.color_frame = line[line.find('#'):-1]
+                    if line.startswith(
+                        '$' + community.id + '-community-header-bg:'):
+                        community.color_header = line[line.find('#'):-1]
+                    if line.startswith(
+                        '$' + community.id + '-community-footer-bg:'):
+                        community.color_footer = line[line.find('#'):-1]
+        # Create
+        else:
+            community.color_bg1 = '#ffffff'
+            community.color_bg2 = '#ffffff'
+            community.color_frame = '#dddddd'
+            community.color_header = '#0d5f89'
+            community.color_footer = '#0d5f89'
+
+            # Write scss
+            lines = []
+            lines.append(
+                '$' + community.id + '-community-body-bg: ' + community.color_bg1 + ';')
+            lines.append(
+                '$' + community.id + '-community-panel-bg: ' + community.color_bg2 + ';')
+            lines.append(
+                '$' + community.id + '-community-panel-border: ' + community.color_frame + ';')
+            lines.append(
+                '$' + community.id + '-community-header-bg: ' + community.color_header + ';')
+            lines.append(
+                '$' + community.id + '-community-footer-bg: ' + community.color_footer + ';')
+
+            lines.append('.communities {.' + community.id +
+                         '-body {background-color: $' + community.id + '-community-body-bg;}}')
+            lines.append('.communities {.' + community.id +
+                         '-panel {background-color: $' + community.id + '-community-panel-bg;}}')
+            lines.append('.communities {.' + community.id +
+                         '-panel {border-color: $' + community.id + '-community-panel-border;}}')
+            lines.append('.communities {.' + community.id +
+                         '-header {background-color: $' + community.id + '-community-header-bg;}}')
+            lines.append('.communities {.' + community.id +
+                         '-footer {background-color: $' + community.id + '-community-footer-bg;}}')
+
+            with open(scss_file, 'w', encoding='utf-8') as fp:
+                fp.writelines('\n'.join(lines))
+
+            # Add to variables
+            var_file = os.path.join(current_app.static_folder,
+                                    'scss/invenio_communities/variables.scss')
+            with open(var_file, 'a', encoding='utf-8') as fp:
+                str = '@import "communities/' + community.id + '";'
+                fp.writelines(str + '\n')
 
         return community
 
