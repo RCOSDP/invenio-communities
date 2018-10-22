@@ -23,6 +23,11 @@
 
 {% extends config.COMMUNITIES_COMMUNITY_TEMPLATE %}
 
+{%- block javascript -%}
+  {{ super() }}
+  {% assets "invenio_communities_js" %}<script src="{{ ASSET_URL }}"></script>{% endassets %}
+{%- endblock javascript -%}
+
 {% block community_body %}
 <div class="container">
   <div class="row">
