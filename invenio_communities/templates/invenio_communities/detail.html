@@ -63,6 +63,9 @@
       {%- endblock search_body %}
       <p class="text-center"><a class="btn btn-default" href="{{url_for('.search', community_id=community
       .id)}}">More</a></p>
+      <div class="col-sm-9 col-md-9 col-lg-9 m-top-20">
+      {% include "weko_search_ui/body_contents.html" %}
+    </div>
     </div>
     <div class="col-md-4">
       <div class="well">{% include "invenio_communities/portalbox_upload.html" %}</div>
