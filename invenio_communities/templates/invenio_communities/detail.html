@@ -23,20 +23,15 @@
 
 {% extends config.COMMUNITIES_COMMUNITY_TEMPLATE %}
 
-{%- block javascript -%}
-  {{ super() }}
-  {% assets "invenio_communities_js" %}<script src="{{ ASSET_URL }}"></script>{% endassets %}
-{%- endblock javascript -%}
-
 {% block community_body %}
 <div class="container">
   <div class="row">
     <div class="col-md-8" id="invenio-search">
       <h2>Recent uploads</h2>
-      <form  id="community-search-form" role="search">
+      <form action="{{url_for('.search', community_id=community.id)}}" role="search">
         <div class="form-group">
           <div class="input-group">
-            <input type="text" class="form-control" id="q" name="q" placeholder="{{_('Search ') + community.title}}">
+            <input type="text" class="form-control" name="q" placeholder="{{_('Search ') + community.title}}">
             <div class="input-group-btn">
               <button id="simple_search" type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
             </div>

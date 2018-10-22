@@ -38,13 +38,4 @@ require([
       $(".container-fluid").addClass(communityId + "-body");
       $(".panel").addClass(communityId + "-panel");
     });
-    $('#simple_search').on('click', function(){
-        $('#community-search-form').submit(function(event){
-            var query= '';
-            query += $('#q').serialize().replace(/\+/g,'%20') + '&';
-            window.location.href = ('/search?page=1&size=20&' + query).slice(0,-1);
-            // stop the form from submitting the normal way and refreshing the page
-            event.preventDefault();
-          })
-     });
   });
