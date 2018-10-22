@@ -496,6 +496,7 @@ def curate(community):
 
     ctx = {'community': community}
     community_id = community.id
+    community_flg = "0"
     return render_template(
         current_app.config['COMMUNITIES_CURATE_TEMPLATE'],
         community_id=community_id, **ctx
