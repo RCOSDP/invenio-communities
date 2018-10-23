@@ -497,9 +497,10 @@ def curate(community):
 
     ctx = {'community': community}
     community_id = community.id
+    community_flg = "0"
     return render_template(
         current_app.config['COMMUNITIES_CURATE_TEMPLATE'],
-        community_id=community_id, community_flg=0, **ctx
+        community_id=community_id, community_flg = community_flg, **ctx
     )
 @blueprint.route('/list/', methods=['GET', ])
 def community_list():
