@@ -168,7 +168,7 @@ def search(community):
         community,
         current_app.config['COMMUNITIES_SEARCH_TEMPLATE'],
         # current_app.config['COMMUNITIES_DETAIL_TEMPLATE'],
-        detail=False)
+        detail=True)
 
 
 @blueprint.route('/<string:community_id>/about/', methods=['GET'])
