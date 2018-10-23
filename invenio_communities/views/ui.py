@@ -166,9 +166,9 @@ def search(community):
     """Index page with uploader and list of existing depositions."""
     return generic_item(
         community,
-        current_app.config['COMMUNITIES_SEARCH_TEMPLATE'],
-        # current_app.config['COMMUNITIES_DETAIL_TEMPLATE'],
-        detail=True)
+        # current_app.config['COMMUNITIES_SEARCH_TEMPLATE'],
+        current_app.config['COMMUNITIES_DETAIL_TEMPLATE'],
+        detail=False)
 
 
 @blueprint.route('/<string:community_id>/about/', methods=['GET'])
