@@ -31,7 +31,7 @@
           <h1>
             {{community.id}}
             {%- if link %}
-            <a href="{{ url_for('.detail', community_id=community.id) }}" style="color: #ffffff;">{{community.title}}</a>
+            <a href="{{ url_for('.detail', community_id='123') }}" style="color: #ffffff;">{{community.title}}</a>
             {% else %}
             {{community.title}}
             {%- endif %}
