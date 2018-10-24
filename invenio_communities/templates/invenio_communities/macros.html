@@ -30,7 +30,8 @@
         <div class="col-md-12">
           <h1>
             {%- if link %}
-            <a href="{{ url_for('.detail', community_id=community.id) }}" style="color: #ffffff;">{{community.title}}</a>
+            <!--<a href="{{ url_for('.detail', community_id=community.id) }}" style="color: #ffffff;">{{community.title}}</a>-->
+            {{community.id}}
             {% else %}
             {{community.title}}
             {%- endif %}
