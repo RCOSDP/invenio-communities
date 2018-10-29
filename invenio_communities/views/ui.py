@@ -156,8 +156,12 @@ def view(community):
 @pass_community
 def detail(community):
     """Index page with uploader and list of existing depositions."""
+    # return generic_item(
+    #     community, current_app.config['COMMUNITIES_DETAIL_TEMPLATE'])
     return generic_item(
-        community, current_app.config['COMMUNITIES_DETAIL_TEMPLATE'])
+        community,
+        current_app.config['COMMUNITIES_SEARCH_TEMPLATE'],
+        detail=False)
 
 
 @blueprint.route('/<string:community_id>/search', methods=['GET'])
@@ -167,7 +171,6 @@ def search(community):
     return generic_item(
         community,
         current_app.config['COMMUNITIES_SEARCH_TEMPLATE'],
-        # current_app.config['COMMUNITIES_DETAIL_TEMPLATE'],
         detail=False)
 
 
