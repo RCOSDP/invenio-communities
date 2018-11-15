@@ -37,7 +37,7 @@ from invenio_db import db
 from invenio_indexer.api import RecordIndexer
 from invenio_pidstore.resolver import Resolver
 from invenio_records.api import Record
-from weko_index_tree.api import Indexes
+from weko_index_tree.models import IndexStyle
 
 from invenio_communities.forms import CommunityForm, DeleteCommunityForm, \
     EditCommunityForm, SearchForm
