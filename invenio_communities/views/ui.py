@@ -134,7 +134,7 @@ def view(community):
 
     :param community_id: ID of the community to view.
     """
-    current_app.logger.debug("AAAAAAAA")
+
     key_val = request.args
     if key_val and 'view' in key_val:
         view_val = request.args.get("view")
