@@ -506,6 +506,8 @@ def curate(community):
         current_app.config['COMMUNITIES_CURATE_TEMPLATE'],
         community_id=community_id, **ctx
     )
+
+
 @blueprint.route('/list/', methods=['GET', ])
 def community_list():
     """Index page with uploader and list of existing depositions."""
