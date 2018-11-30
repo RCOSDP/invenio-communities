@@ -134,6 +134,7 @@ def view(community):
 
     :param community_id: ID of the community to view.
     """
+    current_app.logger.debug("AAAAAAAA")
     key_val = request.args
     if key_val and 'view' in key_val:
         view_val = request.args.get("view")
@@ -144,7 +145,6 @@ def view(community):
         return generic_item(
             community, current_app.config['COMMUNITIES_DETAIL_TEMPLATE'])
 
-    current_app.logger.debug("AAAA")
     ctx = {'community': community}
     community_id = community.id
     # Get index style
