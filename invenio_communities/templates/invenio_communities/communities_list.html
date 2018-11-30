@@ -187,25 +187,9 @@
                     <h4>
                       <div class="pull-right">
                         <div class="form-group">
-                          <!--<div class="dropdown">-->
-                              <!--<button type="button" class="btn dropdown-toggle" id="dropdownMenu_View" data-toggle="dropdown">{{ _('View') }}-->
-                                  <!--<span class="caret"></span>-->
-                              <!--</button>-->
-                              <!--<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu_View">-->
-                                  <!--<li role="presentation">-->
-                                      <!--<a role="menuitem" tabindex="-1" href="{{url_for('.view', community_id=obj.id, view='basic')}}">{{ _('Basic') }}</a>-->
-                                  <!--</li>-->
-                                  <!--<li role="presentation">-->
-                                      <!--<a role="menuitem" tabindex="-1" href="{{url_for('.view', community_id=obj.id, view='weko')}}">{{ _('Weko') }}</a>-->
-                                  <!--</li>-->
-                              <!--</ul>-->
-                          <!--</div>-->
                           <a href="{{url_for('.view', community_id=obj.id, view='basic')}}" class="btn btn-info">{{ _('Basic') }}</a>
                           <a href="{{url_for('.view', community_id=obj.id, view='weko')}}" class="btn btn-info">{{ _('Weko') }}</a>
                         </div>
-                        <!--{% if obj.id_user == current_user.id %}-->
-                          <!--<a href="{{url_for('.curate', community_id=obj.id)}}" class="btn btn-info">{{ _('Curate') }}</a>-->
-                        <!--{% endif %}-->
                       </div>
                       {{ obj.title }}
                     </h4><br />

@@ -48,9 +48,26 @@
 
 {%- block page_footer %}{%- endblock page_footer %}
 
-{%- block search_results %}
-<invenio-search-results-provisional
- template="{{ url_for('static', filename=config.COMMUNITIES_JSTEMPLATE_RESULTS_CURATE) }}"
- community-curation-endpoint="{{ url_for('invenio_communities.curate', community_id=community.id) }}">
-</invenio-search-results-provisional>
-{%- endblock search_results %}
+<!--{%- block search_results %}-->
+<!--<invenio-search-results-provisional-->
+ <!--template="{{ url_for('static', filename=config.COMMUNITIES_JSTEMPLATE_RESULTS_CURATE) }}"-->
+ <!--community-curation-endpoint="{{ url_for('invenio_communities.curate', community_id=community.id) }}">-->
+<!--</invenio-search-results-provisional>-->
+<!--{%- endblock search_results %}-->
+
+
+{%- block page_body_main %}
+  <div class="hide" id="cur_index_id">{{index_id}}</div>
+  <div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+      {% include "weko_theme/body_search.html" %}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-{{width}} col-md-{{width}} col-lg-{{width}}">
+      {% include "weko_theme/body_index.html" %}
+    </div>
+    <div class="col-sm-{{12-width|int}} col-md-{{12-width|int}} col-lg-{{12-width|int}} m-top-20">
+    </div>
+  </div>
+{%- endblock page_body_main %}

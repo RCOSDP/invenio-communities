@@ -38,6 +38,7 @@ from invenio_indexer.api import RecordIndexer
 from invenio_pidstore.resolver import Resolver
 from invenio_records.api import Record
 from weko_index_tree.models import IndexStyle
+from weko_search_ui.api import SearchSetting, get_search_detail_keyword
 
 from invenio_communities.forms import CommunityForm, DeleteCommunityForm, \
     EditCommunityForm, SearchForm
@@ -134,6 +135,7 @@ def view(community):
 
     :param community_id: ID of the community to view.
     """
+
     key_val = request.args
     if key_val and 'view' in key_val:
         view_val = request.args.get("view")
@@ -149,11 +151,18 @@ def view(community):
     # Get index style
     style = IndexStyle.get(current_app.config['WEKO_INDEX_TREE_STYLE_OPTIONS']['id'])
     width = style.width if style else '3'
+
     height = style.height if style else None
 
+    sort_options, display_number = SearchSetting.get_results_setting()
+
+    detail_condition = get_search_detail_keyword('')
+
     return render_template(
-        current_app.config['COMMUNITIES_CURATE_TEMPLATE'],
-        community_id=community_id, width=width, height=height, **ctx)
+        current_app.config['THEME_FRONTPAGE_TEMPLATE'],
+        sort_option = sort_options, detail_condition = detail_condition, community_id = community_id, width = width, height = height, ** ctx
+    )
+
 
 
 @blueprint.route('/<string:community_id>/detail/', methods=['GET'])
@@ -507,9 +516,13 @@ def curate(community):
     width = style.width if style else '3'
     height = style.height if style else None
 
+    sort_options, display_number = SearchSetting.get_results_setting()
+
     return render_template(
         current_app.config['COMMUNITIES_CURATE_TEMPLATE'],
-        community_id=community_id, width=width, height=height, **ctx)
+        community_id=community_id, sort_option=sort_options, width=width, height=height, **ctx)
+
+
 
 @blueprint.route('/list/', methods=['GET', ])
 def community_list():
