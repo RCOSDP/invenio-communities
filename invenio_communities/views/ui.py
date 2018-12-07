@@ -149,11 +149,11 @@ def view(community):
     # Get index style
     style = IndexStyle.get(current_app.config['WEKO_INDEX_TREE_STYLE_OPTIONS']['id'])
     width = style.width if style else '3'
+    height = style.height if style else None
 
     return render_template(
         current_app.config['COMMUNITIES_CURATE_TEMPLATE'],
-        community_id=community_id, width=width, **ctx
-    )
+        community_id=community_id, width=width, height=height, **ctx)
 
 
 @blueprint.route('/<string:community_id>/detail/', methods=['GET'])
@@ -501,10 +501,15 @@ def curate(community):
     ctx = {'community': community}
     community_id = community.id
     community_flg = "0"
+    # Get index style
+    style = IndexStyle.get(current_app.config['WEKO_INDEX_TREE_STYLE_OPTIONS']['id'])
+    width = style.width if style else '3'
+    height = style.height if style else None
+
     return render_template(
         current_app.config['COMMUNITIES_CURATE_TEMPLATE'],
-        community_id=community_id, **ctx
-    )
+        community_id=community_id, width=width, height=height, **ctx)
+
 @blueprint.route('/list/', methods=['GET', ])
 def community_list():
     """Index page with uploader and list of existing depositions."""
