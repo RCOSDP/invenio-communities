@@ -153,8 +153,8 @@ def view(community):
     width = style.width if style else '3'
     sort_options, display_number = SearchSetting.get_results_setting()
     return render_template(
-        # current_app.config['COMMUNITIES_CURATE_TEMPLATE'],
-        current_app.config['WEKO_SEARCH_UI_SEARCH_TEMPLATE'],
+        current_app.config['COMMUNITIES_CURATE_TEMPLATE'],
+        # current_app.config['WEKO_SEARCH_UI_SEARCH_TEMPLATE'],
         sort_option=sort_options, community_id=community_id, width=width, **ctx
     )
 
