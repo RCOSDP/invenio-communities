@@ -38,6 +38,7 @@ from invenio_indexer.api import RecordIndexer
 from invenio_pidstore.resolver import Resolver
 from invenio_records.api import Record
 from weko_index_tree.models import IndexStyle
+from weko_search_ui.api import SearchSetting
 
 from invenio_communities.forms import CommunityForm, DeleteCommunityForm, \
     EditCommunityForm, SearchForm
@@ -502,9 +503,10 @@ def curate(community):
     ctx = {'community': community}
     community_id = community.id
     community_flg = "0"
+    sort_options, display_number = SearchSetting.get_results_setting()
     return render_template(
         current_app.config['COMMUNITIES_CURATE_TEMPLATE'],
-        community_id=community_id, **ctx
+        sort_option=sort_options, community_id=community_id, **ctx
     )
 
 
