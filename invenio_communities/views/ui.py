@@ -151,10 +151,10 @@ def view(community):
     # Get index style
     style = IndexStyle.get(current_app.config['WEKO_INDEX_TREE_STYLE_OPTIONS']['id'])
     width = style.width if style else '3'
-
+    sort_options, display_number = SearchSetting.get_results_setting()
     return render_template(
         current_app.config['COMMUNITIES_CURATE_TEMPLATE'],
-        community_id=community_id, width=width, **ctx
+        sort_option=sort_options, community_id=community_id, width=width, **ctx
     )
 
 
@@ -503,10 +503,9 @@ def curate(community):
     ctx = {'community': community}
     community_id = community.id
     community_flg = "0"
-    sort_options, display_number = SearchSetting.get_results_setting()
     return render_template(
         current_app.config['COMMUNITIES_CURATE_TEMPLATE'],
-        sort_option=sort_options, community_id=community_id, **ctx
+        community_id=community_id, **ctx
     )
 
 
