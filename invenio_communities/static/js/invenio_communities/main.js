@@ -20,6 +20,8 @@
 // waive the privileges and immunities granted to it by virtue of its status
 // as an Intergovernmental Organization or submit itself to any jurisdiction.
 require([
+  "jquery",
+  "node_modules/angular/angular",
   "node_modules/invenio-search-js/dist/invenio-search-js",
   "js/invenio_communities/module",
   ], function() {
