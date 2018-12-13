@@ -156,7 +156,8 @@ def view(community):
     detail_condition = get_search_detail_keyword('')
 
     return render_template(
-        current_app.config['COMMUNITIES_CURATE_TEMPLATE'],
+        # current_app.config['COMMUNITIES_CURATE_TEMPLATE'],
+        current_app.config['WEKO_SEARCH_UI_SEARCH_TEMPLATE'],
         sort_option=sort_options, detail_condition=detail_condition, community_id=community_id, width=width, **ctx
     )
 
