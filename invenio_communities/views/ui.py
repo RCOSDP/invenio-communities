@@ -38,7 +38,7 @@ from invenio_indexer.api import RecordIndexer
 from invenio_pidstore.resolver import Resolver
 from invenio_records.api import Record
 from weko_index_tree.models import IndexStyle
-from weko_search_ui.api import SearchSetting
+from weko_search_ui.api import SearchSetting, get_search_detail_keyword
 
 from invenio_communities.forms import CommunityForm, DeleteCommunityForm, \
     EditCommunityForm, SearchForm
@@ -152,10 +152,12 @@ def view(community):
     style = IndexStyle.get(current_app.config['WEKO_INDEX_TREE_STYLE_OPTIONS']['id'])
     width = style.width if style else '3'
     sort_options, display_number = SearchSetting.get_results_setting()
+
+    detail_condition = get_search_detail_keyword('')
+
     return render_template(
         current_app.config['COMMUNITIES_CURATE_TEMPLATE'],
-        # current_app.config['WEKO_SEARCH_UI_SEARCH_TEMPLATE'],
-        sort_option=sort_options, community_id=community_id, width=width, **ctx
+        sort_option=sort_options, detail_condition=detail_condition, community_id=community_id, width=width, **ctx
     )
 
 
