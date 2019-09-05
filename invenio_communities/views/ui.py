@@ -34,10 +34,12 @@ from flask import Blueprint, abort, current_app, flash, jsonify, redirect, \
 from flask_babelex import gettext as _
 from flask_login import current_user, login_required
 from invenio_db import db
+from invenio_i18n.ext import current_i18n
 from invenio_indexer.api import RecordIndexer
 from invenio_pidstore.resolver import Resolver
 from invenio_records.api import Record
 from weko_index_tree.models import IndexStyle
+from weko_index_tree.utils import get_index_link_list
 from weko_search_ui.api import SearchSetting, get_search_detail_keyword
 
 from invenio_communities.forms import CommunityForm, DeleteCommunityForm, \
@@ -158,8 +160,15 @@ def view(community):
 
     detail_condition = get_search_detail_keyword('')
 
+    if hasattr(current_i18n, 'language'):
+        index_link_list = get_index_link_list(current_i18n.language)
+    else:
+        index_link_list = get_index_link_list()
+
     return render_template(
         current_app.config['THEME_FRONTPAGE_TEMPLATE'],
+        index_link_enabled=style.index_link_enabled,
+        index_link_list=index_link_list,
         sort_option = sort_options, detail_condition = detail_condition, community_id = community_id, width = width, height = height, ** ctx
     )
 
