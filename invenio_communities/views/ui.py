@@ -523,12 +523,14 @@ def curate(community):
         community_id=community_id, sort_option=sort_options, width=width, height=height, **ctx)
 
 
-
 @blueprint.route('/list/', methods=['GET', ])
 def community_list():
     """Index page with uploader and list of existing depositions."""
     ctx = mycommunities_ctx()
-
+    from weko_theme.utils import get_design_layout
+    # Get the design for widget rendering
+    page, render_widgets = get_design_layout(
+        current_app.config['WEKO_THEME_DEFAULT_COMMUNITY'])
     p = request.args.get('p', type=str)
     so = request.args.get('so', type=str)
     page = request.args.get('page', type=int, default=1)
@@ -555,5 +557,7 @@ def community_list():
     })
 
     return render_template(
-        'invenio_communities/communities_list.html', **ctx)
-
+        'invenio_communities/communities_list.html',
+        page=page,
+        render_widgets=render_widgets,
+        **ctx)
