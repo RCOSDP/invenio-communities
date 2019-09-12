@@ -26,7 +26,8 @@
 
 from __future__ import absolute_import, print_function
 
-import copy, os
+import copy
+import os
 from functools import wraps
 
 from flask import Blueprint, abort, current_app, flash, jsonify, redirect, \
@@ -135,13 +136,12 @@ def view(community):
 
     :param community_id: ID of the community to view.
     """
-
     key_val = request.args
     if key_val and 'view' in key_val:
         view_val = request.args.get("view")
     else:
         view_val = None
-    if not view_val is None and 'basic' in view_val:
+    if view_val is not None and 'basic' in view_val:
         # return redirect(url_for('.detail', community_id=community.id))
         return generic_item(
             community, current_app.config['COMMUNITIES_DETAIL_TEMPLATE'])
@@ -149,7 +149,8 @@ def view(community):
     ctx = {'community': community}
     community_id = community.id
     # Get index style
-    style = IndexStyle.get(current_app.config['WEKO_INDEX_TREE_STYLE_OPTIONS']['id'])
+    style = IndexStyle.get(
+        current_app.config['WEKO_INDEX_TREE_STYLE_OPTIONS']['id'])
     width = style.width if style else '3'
 
     height = style.height if style else None
@@ -160,9 +161,8 @@ def view(community):
 
     return render_template(
         current_app.config['THEME_FRONTPAGE_TEMPLATE'],
-        sort_option = sort_options, detail_condition = detail_condition, community_id = community_id, width = width, height = height, ** ctx
+        sort_option=sort_options, detail_condition=detail_condition, community_id=community_id, width=width, height=height, ** ctx
     )
-
 
 
 @blueprint.route('/<string:community_id>/detail/', methods=['GET'])
@@ -244,34 +244,57 @@ def new():
                                  'scss/invenio_communities/communities/' + fn)
         # Write scss
         lines = []
-        lines.append('$' + community_id + '-community-body-bg: ' + community.color_bg1 + ';')
-        lines.append('$' + community_id + '-community-panel-bg: ' + community.color_bg2 + ';')
-        lines.append('$' + community_id + '-community-panel-border: ' + community.color_frame + ';')
-        lines.append('$' + community_id + '-community-header-bg: ' + community.color_header + ';')
-        lines.append('$' + community_id + '-community-footer-bg: ' + community.color_footer + ';')
+        lines.append(
+            '$'
+            + community_id
+            + '-community-body-bg: '
+            + community.color_bg1
+            + ';')
+        lines.append(
+            '$'
+            + community_id
+            + '-community-panel-bg: '
+            + community.color_bg2
+            + ';')
+        lines.append(
+            '$'
+            + community_id
+            + '-community-panel-border: '
+            + community.color_frame
+            + ';')
+        lines.append(
+            '$'
+            + community_id
+            + '-community-header-bg: '
+            + community.color_header
+            + ';')
+        lines.append(
+            '$'
+            + community_id
+            + '-community-footer-bg: '
+            + community.color_footer
+            + ';')
 
-        lines.append('.communities {.' + community.id +
-                     '-body {background-color: $' + community_id + '-community-body-bg;}}')
-        lines.append('.communities {.' + community.id +
-                     '-panel {background-color: $' + community_id + '-community-panel-bg;}}')
-        lines.append('.communities {.' + community.id +
-                     '-panel {border-color: $' + community_id + '-community-panel-border;}}')
-        lines.append('.communities {.' + community.id +
-                     '-header {background-color: $' + community_id + '-community-header-bg;}}')
-        lines.append('.communities {.' + community.id +
-                     '-footer {background-color: $' + community_id + '-community-footer-bg;}}')
+        lines.append('.communities {.' + community.id
+                     + '-body {background-color: $' + community_id + '-community-body-bg;}}')
+        lines.append('.communities {.' + community.id
+                     + '-panel {background-color: $' + community_id + '-community-panel-bg;}}')
+        lines.append('.communities {.' + community.id
+                     + '-panel {border-color: $' + community_id + '-community-panel-border;}}')
+        lines.append('.communities {.' + community.id
+                     + '-header {background-color: $' + community_id + '-community-header-bg;}}')
+        lines.append('.communities {.' + community.id
+                     + '-footer {background-color: $' + community_id + '-community-footer-bg;}}')
 
         with open(scss_file, 'w', encoding='utf-8') as fp:
             fp.writelines('\n'.join(lines))
 
         # Add to variables
         var_file = os.path.join(current_app.static_folder,
-                                 'scss/invenio_communities/variables.scss')
+                                'scss/invenio_communities/variables.scss')
         with open(var_file, 'a', encoding='utf-8') as fp:
             str = '@import "communities/' + community_id + '";'
             fp.writelines(str + '\n')
-
-
 
         file = request.files.get('logo', None)
         if file:
@@ -293,6 +316,7 @@ def new():
         **ctx
     )
 
+
 @blueprint.route('/<string:community_id>/edit/', methods=['GET', 'POST'])
 @login_required
 @pass_community
@@ -306,19 +330,19 @@ def edit(community):
                 for line in fp.readlines():
                     line = line.strip() if line else ''
                     if line.startswith(
-                        '$' + community.id + '-community-body-bg:'):
+                            '$' + community.id + '-community-body-bg:'):
                         community.color_bg1 = line[line.find('#'):-1]
                     if line.startswith(
-                        '$' + community.id + '-community-panel-bg:'):
+                            '$' + community.id + '-community-panel-bg:'):
                         community.color_bg2 = line[line.find('#'):-1]
                     if line.startswith(
-                        '$' + community.id + '-community-panel-border:'):
+                            '$' + community.id + '-community-panel-border:'):
                         community.color_frame = line[line.find('#'):-1]
                     if line.startswith(
-                        '$' + community.id + '-community-header-bg:'):
+                            '$' + community.id + '-community-header-bg:'):
                         community.color_header = line[line.find('#'):-1]
                     if line.startswith(
-                        '$' + community.id + '-community-footer-bg:'):
+                            '$' + community.id + '-community-footer-bg:'):
                         community.color_footer = line[line.find('#'):-1]
         # Create
         else:
@@ -331,26 +355,61 @@ def edit(community):
             # Write scss
             lines = []
             lines.append(
-                '$' + community.id + '-community-body-bg: ' + community.color_bg1 + ';')
+                '$'
+                + community.id
+                + '-community-body-bg: '
+                + community.color_bg1
+                + ';')
             lines.append(
-                '$' + community.id + '-community-panel-bg: ' + community.color_bg2 + ';')
+                '$'
+                + community.id
+                + '-community-panel-bg: '
+                + community.color_bg2
+                + ';')
             lines.append(
-                '$' + community.id + '-community-panel-border: ' + community.color_frame + ';')
+                '$'
+                + community.id
+                + '-community-panel-border: '
+                + community.color_frame
+                + ';')
             lines.append(
-                '$' + community.id + '-community-header-bg: ' + community.color_header + ';')
+                '$'
+                + community.id
+                + '-community-header-bg: '
+                + community.color_header
+                + ';')
             lines.append(
-                '$' + community.id + '-community-footer-bg: ' + community.color_footer + ';')
+                '$'
+                + community.id
+                + '-community-footer-bg: '
+                + community.color_footer
+                + ';')
 
-            lines.append('.communities {.' + community.id +
-                         '-body {background-color: $' + community.id + '-community-body-bg;}}')
-            lines.append('.communities {.' + community.id +
-                         '-panel {background-color: $' + community.id + '-community-panel-bg;}}')
-            lines.append('.communities {.' + community.id +
-                         '-panel {border-color: $' + community.id + '-community-panel-border;}}')
-            lines.append('.communities {.' + community.id +
-                         '-header {background-color: $' + community.id + '-community-header-bg;}}')
-            lines.append('.communities {.' + community.id +
-                         '-footer {background-color: $' + community.id + '-community-footer-bg;}}')
+            lines.append('.communities {.'
+                         + community.id
+                         + '-body {background-color: $'
+                         + community.id
+                         + '-community-body-bg;}}')
+            lines.append('.communities {.'
+                         + community.id
+                         + '-panel {background-color: $'
+                         + community.id
+                         + '-community-panel-bg;}}')
+            lines.append('.communities {.'
+                         + community.id
+                         + '-panel {border-color: $'
+                         + community.id
+                         + '-community-panel-border;}}')
+            lines.append('.communities {.'
+                         + community.id
+                         + '-header {background-color: $'
+                         + community.id
+                         + '-community-header-bg;}}')
+            lines.append('.communities {.'
+                         + community.id
+                         + '-footer {background-color: $'
+                         + community.id
+                         + '-community-footer-bg;}}')
 
             with open(scss_file, 'w', encoding='utf-8') as fp:
                 fp.writelines('\n'.join(lines))
@@ -392,21 +451,61 @@ def edit(community):
 
         # Write scss
         lines = []
-        lines.append('$' + community.id + '-community-body-bg: ' + color_bg1 + ';')
-        lines.append('$' + community.id + '-community-panel-bg: ' + color_bg2 + ';')
-        lines.append('$' + community.id + '-community-panel-border: ' + color_frame + ';')
-        lines.append('$' + community.id + '-community-header-bg: ' + color_header + ';')
-        lines.append('$' + community.id + '-community-footer-bg: ' + color_footer + ';')
-        lines.append('.communities {.' + community.id +
-                     '-body {background-color: $' + community.id + '-community-body-bg;}}')
-        lines.append('.communities {.' + community.id +
-                     '-panel {background-color: $' + community.id + '-community-panel-bg;}}')
-        lines.append('.communities {.' + community.id +
-                     '-panel {border-color: $' + community.id + '-community-panel-border;}}')
-        lines.append('.communities {.' + community.id +
-                     '-header {background-color: $' + community.id + '-community-header-bg;}}')
-        lines.append('.communities {.' + community.id +
-                     '-footer {background-color: $' + community.id + '-community-footer-bg;}}')
+        lines.append(
+            '$'
+            + community.id
+            + '-community-body-bg: '
+            + color_bg1
+            + ';')
+        lines.append(
+            '$'
+            + community.id
+            + '-community-panel-bg: '
+            + color_bg2
+            + ';')
+        lines.append(
+            '$'
+            + community.id
+            + '-community-panel-border: '
+            + color_frame
+            + ';')
+        lines.append(
+            '$'
+            + community.id
+            + '-community-header-bg: '
+            + color_header
+            + ';')
+        lines.append(
+            '$'
+            + community.id
+            + '-community-footer-bg: '
+            + color_footer
+            + ';')
+        lines.append('.communities {.'
+                     + community.id
+                     + '-body {background-color: $'
+                     + community.id
+                     + '-community-body-bg;}}')
+        lines.append('.communities {.'
+                     + community.id
+                     + '-panel {background-color: $'
+                     + community.id
+                     + '-community-panel-bg;}}')
+        lines.append('.communities {.'
+                     + community.id
+                     + '-panel {border-color: $'
+                     + community.id
+                     + '-community-panel-border;}}')
+        lines.append('.communities {.'
+                     + community.id
+                     + '-header {background-color: $'
+                     + community.id
+                     + '-community-header-bg;}}')
+        lines.append('.communities {.'
+                     + community.id
+                     + '-footer {background-color: $'
+                     + community.id
+                     + '-community-footer-bg;}}')
 
         with open(scss_file, 'w', encoding='utf-8') as fp:
             fp.writelines('\n'.join(lines))
@@ -512,7 +611,8 @@ def curate(community):
     community_flg = "0"
 
     # Get index style
-    style = IndexStyle.get(current_app.config['WEKO_INDEX_TREE_STYLE_OPTIONS']['id'])
+    style = IndexStyle.get(
+        current_app.config['WEKO_INDEX_TREE_STYLE_OPTIONS']['id'])
     width = style.width if style else '3'
     height = style.height if style else None
 
