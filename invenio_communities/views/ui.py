@@ -629,7 +629,7 @@ def community_list():
     ctx = mycommunities_ctx()
     from weko_theme.utils import get_design_layout
     # Get the design for widget rendering
-    page, render_widgets = get_design_layout(
+    render_page, render_widgets = get_design_layout(
         current_app.config['WEKO_THEME_DEFAULT_COMMUNITY'])
     p = request.args.get('p', type=str)
     so = request.args.get('so', type=str)
@@ -658,6 +658,6 @@ def community_list():
 
     return render_template(
         'invenio_communities/communities_list.html',
-        page=page,
+        page=render_page,
         render_widgets=render_widgets,
         **ctx)
