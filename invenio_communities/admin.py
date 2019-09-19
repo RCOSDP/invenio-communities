@@ -28,7 +28,7 @@ from __future__ import absolute_import, print_function
 from flask_admin.contrib.sqla import ModelView
 
 from .models import Community, FeaturedCommunity, InclusionRequest
-
+from wtforms.validators import ValidationError
 
 def _(x):
     """Identity function for string extraction."""
@@ -56,6 +56,27 @@ class CommunityModelView(ModelView):
         'fixed_points',
     )
     column_searchable_list = ('id', 'title', 'description')
+
+
+    def _validate_input_id(form, field):
+        if field.data is None:
+            raise ValidationError(
+                _('Data is none '
+                  'input'))
+        else:
+            try:
+                if field.data is not None:
+                        raise ValidationError(
+                            _('Data is NOT none '
+                              'input'))
+            except Exception as ex:
+                raise ValidationError('{}'.format(ex))
+
+    form_args = {
+        'id': {
+            'validators': [_validate_input_id]
+        }
+    }
 
 
 class FeaturedCommunityModelView(ModelView):
