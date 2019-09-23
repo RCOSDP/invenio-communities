@@ -29,6 +29,7 @@ from flask_admin.contrib.sqla import ModelView
 
 from .models import Community, FeaturedCommunity, InclusionRequest
 from wtforms.validators import ValidationError
+import re
 
 def _(x):
     """Identity function for string extraction."""
@@ -59,21 +60,35 @@ class CommunityModelView(ModelView):
 
 
     def _validate_input_id(form, field):
-        current_app.logger.debug('------------DEBUGGER 2------------')
-        current_app.logger.debug(field.data)
-        if field.data == 'abc':
-            current_app.logger.debug(
-                '------------DEBUGGER ABC NOT ALLOW------------')
-            raise ValidationError(
-                _('Abc is not allow '
-                  'input'))
-        else:
+        the_patterns = {
+            "ASCII_LETTER_PATTERN": "[\x20-\x7F]",
+            "FIRST_LETTER_PATTERN": "^[a-zA-Z].*",
+            "PUNCTUATION_PATTERN": "[\x20-\x2C]|[\x2E-\x2F]|[\x3A-\x40]|[\x5D-\x5E]|[\x7B-\x7E]|[\x5B]|[\x60]",
+
+        }
+
+        the_result = {
+            "ASCII_LETTER_PATTERN": "The character must be ASCII.",
+            "FIRST_LETTER_PATTERN": "The first character must be alphabet.",
+            "PUNCTUATION_PATTERN": "Puntuation character require escape backslash"
+        }
+
+        for pattern in the_patterns:
             try:
-                current_app.logger.debug(
-                    '------------DEBUGGER ABC ALLOW------------')
-                raise ValidationError(
-                            _('Abc is ALLOW '
-                              'input'))
+                if pattern == 'PUNCTUATION_PATTERN':
+                    count_puntuation = len(re.findall(the_patterns[pattern],
+                                                      field.data))
+                    backslask_pattern = \
+                        r"\\[\x20-\x2C]|[\x2E-\x2F]|[\x3A-\x40]|[\x5D-\x5E]|[\x7B-\x7E]|[\x5B]|[\x60]"
+                    count_backslask = len(re.findall(backslask_pattern, field.data))
+                    if count_puntuation != count_backslask:
+                        ValidationError(the_result[pattern])
+                        break
+                else:
+                    m = re.match(the_patterns[pattern], field.data)
+                    if (m is None):
+                        raise ValidationError(the_result[pattern])
+                        break
             except Exception as ex:
                 raise ValidationError('{}'.format(ex))
 
