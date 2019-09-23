@@ -24,7 +24,7 @@
 """Admin model views for Communities."""
 
 from __future__ import absolute_import, print_function
-
+from flask import current_app
 from flask_admin.contrib.sqla import ModelView
 
 from .models import Community, FeaturedCommunity, InclusionRequest
@@ -59,6 +59,8 @@ class CommunityModelView(ModelView):
 
 
     def _validate_input_id(form, field):
+        current_app.logger.debug('------------DEBUGGER------------')
+        current_app.logger.debug(field)
         if field.data is None:
             raise ValidationError(
                 _('Data is none '
