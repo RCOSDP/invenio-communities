@@ -59,17 +59,20 @@ class CommunityModelView(ModelView):
 
 
     def _validate_input_id(form, field):
-        current_app.logger.debug('------------DEBUGGER------------')
-        current_app.logger.debug(field)
-        if field.data is None:
+        current_app.logger.debug('------------DEBUGGER 2------------')
+        current_app.logger.debug(field.data)
+        if field.data == 'abc':
+            current_app.logger.debug(
+                '------------DEBUGGER ABC NOT ALLOW------------')
             raise ValidationError(
-                _('Data is none '
+                _('Abc is not allow '
                   'input'))
         else:
             try:
-                if field.data is not None:
-                        raise ValidationError(
-                            _('Data is NOT none '
+                current_app.logger.debug(
+                    '------------DEBUGGER ABC ALLOW------------')
+                raise ValidationError(
+                            _('Abc is ALLOW '
                               'input'))
             except Exception as ex:
                 raise ValidationError('{}'.format(ex))
