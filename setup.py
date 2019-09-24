@@ -34,22 +34,20 @@ readme = open('README.rst').read()
 history = open('CHANGES.rst').read()
 
 tests_require = [
-    'Flask-CeleryExt>=0.3.2',
+    'Flask-CeleryExt>=0.2.2',
+    'SQLAlchemy-Continuum>=1.2.1',
     'check-manifest>=0.25',
-    'coverage>=4.5.3',
-    'invenio-db>=1.0.3',
-    'invenio-mail>=1.0.2',
-    'invenio-oaiserver>=1.0.3',
+    'coverage>=4.0',
+    'invenio-mail>=1.0.0a3',
+    'invenio-oaiserver>=1.0.0a9',
     'isort>=4.3.3',
     'mock>=1.3.0',
     'pydocstyle>=1.0.0',
     'pytest-cache>=1.0',
-    'pytest-cov>=2.7.1',
+    'pytest-cov>=1.8.0',
     'pytest-pep8>=1.0.6',
-    'pytest>=4.6.4,<5.0.0',
+    'pytest>=2.8.0,!=3.3.0',
 ]
-
-invenio_search_version = '1.2.2'
 
 extras_require = {
     'admin': [
@@ -62,29 +60,23 @@ extras_require = {
         'Flask-Mail>=0.9.1',
     ],
     'oai': [
-        'invenio-oaiserver>=1.0.3',
+        'invenio-oaiserver>=1.0.0a8',
     ],
-    'elasticsearch2': [
-        'invenio-search[elasticsearch2]>={}'.format(invenio_search_version),
+    'mysql': [
+        'invenio-db[mysql]>=1.0.0b3',
     ],
-    'elasticsearch5': [
-        'invenio-search[elasticsearch5]>={}'.format(invenio_search_version),
+    'postgresql': [
+        'invenio-db[postgresql]>=1.0.0b3',
     ],
-    'elasticsearch6': [
-        'invenio-search[elasticsearch6]>={}'.format(invenio_search_version),
-    ],
-    'elasticsearch7': [
-        'invenio-search[elasticsearch7]>={}'.format(invenio_search_version),
+    'sqlite': [
+        'invenio-db>=1.0.0b3',
     ],
     'tests': tests_require,
 }
 
 extras_require['all'] = []
 for name, reqs in extras_require.items():
-    if name in (
-        'elasticsearch2', 'elasticsearch5', 'elasticsearch6',
-        'elasticsearch7'
-    ):
+    if name in ('mysql', 'postgresql', 'sqlite'):
         continue
     extras_require['all'].extend(reqs)
 
@@ -94,20 +86,20 @@ setup_requires = [
 ]
 
 install_requires = [
-    'bleach>=2.1.3',
     'Flask-BabelEx>=0.9.3',
     'Flask>=0.11.1',
     'elasticsearch-dsl>=6.0.0,<6.2.0',
     'elasticsearch>=6.0.0,<7.0.0',
-    'invenio-access>=1.1.0',
-    'invenio-accounts>=1.1.0',
-    'invenio-files-rest>=1.0.0b1',
-    'invenio-indexer>=1.0.2',
-    'invenio-pidstore>=1.0.0',
-    'invenio-records>=1.2.0',
-    'invenio-rest[cors]>=1.0.0',
+    'invenio-access>=1.0.0a11',
+    'invenio-accounts>=1.0.0b1',
+    'invenio-assets>=1.0.0b2',
+    'invenio-files-rest>=1.0.0.a14',
+    'invenio-indexer>=1.0.0a8',
+    'invenio-pidstore>=1.0.0b1',
+    'invenio-records>=1.0.0b1',
+    'invenio-rest[cors]>=1.0.0a9',
     'invenio-search>=1.0.0a9',
-    'marshmallow>=2.15.0,<3',
+    'marshmallow>=2.15.0',
 ]
 
 packages = find_packages()
