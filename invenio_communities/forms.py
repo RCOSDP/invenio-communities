@@ -40,7 +40,7 @@ class CommunityForm(Form):
     field_sets = [
         ('Information',
          ['identifier', 'title', 'description', 'curation_policy', 'page',
-          'community_header', 'community_footer','logo','index_checked_nodeId' , ],
+          'community_header', 'community_footer', 'logo', 'index_checked_nodeId'],
          {'classes': 'in'}),
     ]
 
@@ -104,7 +104,7 @@ class CommunityForm(Form):
                         message=_('The identifier must be less'
                                   ' than 100 characters long.')),
                     validators.regexp(
-                        u'^[-\w]+$',
+                        r'^[-\w]+$',
                         message=_(
                             'Only letters, numbers and dash are allowed'))]
     )
