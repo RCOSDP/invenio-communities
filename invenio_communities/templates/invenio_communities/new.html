@@ -326,22 +326,6 @@
                             <input type="color" class="form-control color_frame" name="color_frame" value="#dddddd">
                           {% endif %}
                         </div>
-                        <div class="form-group col-sm-3">
-                          <label class="sub-label" for="navbar-default-bg">{{_('Header')}}</label>
-                          {% if community.color_header %}
-                            <input type="color" class="form-control color_header" name="color_header" value={{ community.color_header }}>
-                          {% else %}
-                            <input type="color" class="form-control color_header" name="color_header" value="#0d5f89">
-                          {% endif %}
-                        </div>
-                        <div class="form-group col-sm-3">
-                          <label class="sub-label" for="footer-default-bg">{{_('Footer')}}</label>
-                          {% if community.color_footer %}
-                            <input type="color" class="form-control color_footer" name="color_footer" value={{ community.color_footer }}>
-                          {% else %}
-                            <input type="color" class="form-control color_footer" name="color_footer" value="#0d5f89">
-                          {% endif %}
-                        </div>
                       </div>
                     </div>
                     <p class="text-muted help-block field-desc"><small>Optional. A color design of the community collection, which will be displayed on the index page of the community.</small></p>
