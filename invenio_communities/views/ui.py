@@ -30,7 +30,6 @@ import copy
 import os
 from functools import wraps
 
-import bleach
 from flask import Blueprint, abort, current_app, flash, jsonify, redirect, \
     render_template, request, url_for
 from flask_babelex import gettext as _
@@ -55,17 +54,6 @@ blueprint = Blueprint(
     template_folder='../templates',
     static_folder='../static',
 )
-
-
-@blueprint.app_template_filter('sanitize_html')
-def sanitize_html(value):
-    """Sanitizes HTML using the bleach library."""
-    return bleach.clean(
-        value,
-        tags=current_app.config['COMMUNITIES_ALLOWED_TAGS'],
-        attributes=current_app.config['COMMUNITIES_ALLOWED_ATTRS'],
-        strip=True,
-    ).strip()
 
 
 def pass_community(f):
@@ -458,8 +446,8 @@ def edit(community):
         color_bg1 = request.form.get('color_bg1', '#ffffff')
         color_bg2 = request.form.get('color_bg2', '#ffffff')
         color_frame = request.form.get('color_frame', '#dddddd')
-        color_header = request.form.get('color_header', '#0d5f89')
-        color_footer = request.form.get('color_footer', '#0d5f89')
+        color_header = request.form.get('color_header', community.color_header)
+        color_footer = request.form.get('color_footer', community.color_footer)
 
         # Write scss
         lines = []
