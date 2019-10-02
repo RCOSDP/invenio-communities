@@ -98,6 +98,15 @@ class CommunityModelView(ModelView):
         }
     }
 
+    form_edit_rules = (
+        'id')
+
+    form_widget_args = {
+        'id': {
+            'disabled': True
+        }
+    }
+
 
 class FeaturedCommunityModelView(ModelView):
     """ModelView for the FeaturedCommunity."""
