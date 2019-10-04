@@ -24,12 +24,14 @@
 """Admin model views for Communities."""
 
 from __future__ import absolute_import, print_function
-from flask import current_app
+
+import re
+
 from flask_admin.contrib.sqla import ModelView
+from wtforms.validators import ValidationError
 
 from .models import Community, FeaturedCommunity, InclusionRequest
-from wtforms.validators import ValidationError
-import re
+
 
 def _(x):
     """Identity function for string extraction."""
@@ -59,24 +61,27 @@ class CommunityModelView(ModelView):
     column_searchable_list = ('id', 'title', 'description')
     edit_template = "invenio_communities/admin/edit.html"
 
-
     def _validate_input_id(self, field):
         the_patterns = {
             "ASCII_LETTER_PATTERN": "^[a-zA-Z_-]+[a-zAZ0-9_-]$",
             "FIRST_LETTER_PATTERN": "^[a-zA-Z_-].*",
         }
         the_result = {
-            "ASCII_LETTER_PATTERN": "Don't use the special character except `-` and `_`.",
-            "FIRST_LETTER_PATTERN": 'The first character cannot be a number or special character. It should be an alphabet character, "-" or "_"',
+            "ASCII_LETTER_PATTERN": "Don't use the special "
+                                    "character except `-` and `_`.",
+            "FIRST_LETTER_PATTERN": 'The first character cannot '
+                                    'be a number or special character. '
+                                    'It should be an '
+                                    'alphabet character, "-" or "_"',
         }
 
-        if(the_patterns['FIRST_LETTER_PATTERN']):
+        if the_patterns['FIRST_LETTER_PATTERN']:
             m = re.match(the_patterns['FIRST_LETTER_PATTERN'], field.data)
-            if (m is None):
+            if m is None:
                 raise ValidationError(the_result['FIRST_LETTER_PATTERN'])
-            if (the_patterns['ASCII_LETTER_PATTERN']):
+            if the_patterns['ASCII_LETTER_PATTERN']:
                 m = re.match(the_patterns['ASCII_LETTER_PATTERN'], field.data)
-                if (m is None):
+                if m is None:
                     raise ValidationError(the_result['ASCII_LETTER_PATTERN'])
 
     form_args = {
