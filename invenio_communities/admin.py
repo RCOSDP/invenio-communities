@@ -63,7 +63,7 @@ class CommunityModelView(ModelView):
 
     def _validate_input_id(self, field):
         the_patterns = {
-            "ASCII_LETTER_PATTERN": "^[a-zA-Z_-]+[a-zAZ0-9_-]$",
+            "ASCII_LETTER_PATTERN": "^[a-zA-Z_-]+[a-zA-Z0-9_-]$",
             "FIRST_LETTER_PATTERN": "^[a-zA-Z_-].*",
         }
         the_result = {
