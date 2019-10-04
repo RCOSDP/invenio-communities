@@ -57,40 +57,27 @@ class CommunityModelView(ModelView):
         'fixed_points',
     )
     column_searchable_list = ('id', 'title', 'description')
+    edit_template = "invenio_communities/admin/edit.html"
 
 
-    def _validate_input_id(form, field):
+    def _validate_input_id(self, field):
         the_patterns = {
-            "ASCII_LETTER_PATTERN": "[\x20-\x7F]",
-            "FIRST_LETTER_PATTERN": "^[a-zA-Z].*",
-            "PUNCTUATION_PATTERN": "[\x20-\x2C]|[\x2E-\x2F]|[\x3A-\x40]|[\x5D-\x5E]|[\x7B-\x7E]|[\x5B]|[\x60]",
-
+            "ASCII_LETTER_PATTERN": "^[a-zA-Z_-]+[a-zAZ0-9_-]$",
+            "FIRST_LETTER_PATTERN": "^[a-zA-Z_-].*",
         }
-
         the_result = {
-            "ASCII_LETTER_PATTERN": "The character must be ASCII.",
-            "FIRST_LETTER_PATTERN": "The first character must be alphabet.",
-            "PUNCTUATION_PATTERN": "Puntuation character require escape backslash"
+            "ASCII_LETTER_PATTERN": "Don't use the special character except `-` and `_`.",
+            "FIRST_LETTER_PATTERN": 'The first character cannot be a number or special character. It should be an alphabet character, "-" or "_"',
         }
 
-        for pattern in the_patterns:
-            try:
-                if pattern == 'PUNCTUATION_PATTERN':
-                    count_puntuation = len(re.findall(the_patterns[pattern],
-                                                      field.data))
-                    backslask_pattern = \
-                        r"\\[\x20-\x2C]|[\x2E-\x2F]|[\x3A-\x40]|[\x5D-\x5E]|[\x7B-\x7E]|[\x5B]|[\x60]"
-                    count_backslask = len(re.findall(backslask_pattern, field.data))
-                    if count_puntuation != count_backslask:
-                        ValidationError(the_result[pattern])
-                        break
-                else:
-                    m = re.match(the_patterns[pattern], field.data)
-                    if (m is None):
-                        raise ValidationError(the_result[pattern])
-                        break
-            except Exception as ex:
-                raise ValidationError('{}'.format(ex))
+        if(the_patterns['FIRST_LETTER_PATTERN']):
+            m = re.match(the_patterns['FIRST_LETTER_PATTERN'], field.data)
+            if (m is None):
+                raise ValidationError(the_result['FIRST_LETTER_PATTERN'])
+            if (the_patterns['ASCII_LETTER_PATTERN']):
+                m = re.match(the_patterns['ASCII_LETTER_PATTERN'], field.data)
+                if (m is None):
+                    raise ValidationError(the_result['ASCII_LETTER_PATTERN'])
 
     form_args = {
         'id': {
@@ -98,12 +85,10 @@ class CommunityModelView(ModelView):
         }
     }
 
-    form_edit_rules = (
-        'id')
-
     form_widget_args = {
         'id': {
-            'disabled': True
+            'placeholder':  'Please select ID',
+            'maxlength': 100,
         }
     }
 
