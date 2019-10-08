@@ -26,13 +26,16 @@
 
 from __future__ import absolute_import, print_function
 
+import re
+
 from flask_babelex import gettext as _
 from flask_wtf import Form
 from wtforms import FileField, HiddenField, StringField, TextAreaField, \
     validators
 from wtforms.validators import ValidationError
+
 from .models import Community
-import re
+
 
 def _validate_input_id(form, field):
     the_patterns = {
@@ -58,14 +61,14 @@ def _validate_input_id(form, field):
                 raise ValidationError(the_result['ASCII_LETTER_PATTERN'])
 
 
-
 class CommunityForm(Form):
     """Community form."""
 
     field_sets = [
         ('Information',
          ['identifier', 'title', 'description', 'curation_policy', 'page',
-          'community_header', 'community_footer','logo','index_checked_nodeId' , ],
+          'community_header', 'community_footer', 'logo',
+          'index_checked_nodeId', ],
          {'classes': 'in'}),
     ]
 
@@ -125,7 +128,8 @@ class CommunityForm(Form):
         validators=[validators.DataRequired(),
                     validators.length(
                         max=100,
-                        message=_('Field cannot be longer than 100 characters.')),
+                        message=_(
+                            'Field cannot be longer than 100 characters.')),
                     _validate_input_id]
     )
 

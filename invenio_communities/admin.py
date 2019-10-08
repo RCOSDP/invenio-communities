@@ -81,9 +81,11 @@ class CommunityModelView(ModelView):
                 if m is None:
                     raise ValidationError(the_result['FIRST_LETTER_PATTERN'])
                 if the_patterns['ASCII_LETTER_PATTERN']:
-                    m = re.match(the_patterns['ASCII_LETTER_PATTERN'], field.data)
+                    m = re.match(the_patterns['ASCII_LETTER_PATTERN'],
+                                 field.data)
                     if m is None:
-                        raise ValidationError(the_result['ASCII_LETTER_PATTERN'])
+                        raise ValidationError(
+                            the_result['ASCII_LETTER_PATTERN'])
 
     form_args = {
         'id': {
