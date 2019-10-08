@@ -63,26 +63,27 @@ class CommunityModelView(ModelView):
 
     def _validate_input_id(self, field):
         the_patterns = {
-            "ASCII_LETTER_PATTERN": "^[a-zA-Z_-]+[a-zA-Z0-9_-]$",
+            "ASCII_LETTER_PATTERN": "[a-zA-Z0-9_-]+$",
             "FIRST_LETTER_PATTERN": "^[a-zA-Z_-].*",
         }
         the_result = {
-            "ASCII_LETTER_PATTERN": "Don't use the special "
+            "ASCII_LETTER_PATTERN": "Don't use space or special"
                                     "character except `-` and `_`.",
             "FIRST_LETTER_PATTERN": 'The first character cannot '
                                     'be a number or special character. '
                                     'It should be an '
                                     'alphabet character, "-" or "_"',
         }
-
-        if the_patterns['FIRST_LETTER_PATTERN']:
-            m = re.match(the_patterns['FIRST_LETTER_PATTERN'], field.data)
-            if m is None:
-                raise ValidationError(the_result['FIRST_LETTER_PATTERN'])
-            if the_patterns['ASCII_LETTER_PATTERN']:
-                m = re.match(the_patterns['ASCII_LETTER_PATTERN'], field.data)
+        if field.data:
+            field.data = field.data.lower()
+            if the_patterns['FIRST_LETTER_PATTERN']:
+                m = re.match(the_patterns['FIRST_LETTER_PATTERN'], field.data)
                 if m is None:
-                    raise ValidationError(the_result['ASCII_LETTER_PATTERN'])
+                    raise ValidationError(the_result['FIRST_LETTER_PATTERN'])
+                if the_patterns['ASCII_LETTER_PATTERN']:
+                    m = re.match(the_patterns['ASCII_LETTER_PATTERN'], field.data)
+                    if m is None:
+                        raise ValidationError(the_result['ASCII_LETTER_PATTERN'])
 
     form_args = {
         'id': {

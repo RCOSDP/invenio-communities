@@ -30,8 +30,33 @@ from flask_babelex import gettext as _
 from flask_wtf import Form
 from wtforms import FileField, HiddenField, StringField, TextAreaField, \
     validators
-
+from wtforms.validators import ValidationError
 from .models import Community
+import re
+
+def _validate_input_id(form, field):
+    the_patterns = {
+        "ASCII_LETTER_PATTERN": "[a-zA-Z0-9_-]+$",
+        "FIRST_LETTER_PATTERN": "^[a-zA-Z_-].*",
+    }
+    the_result = {
+        "ASCII_LETTER_PATTERN": "Don't use space or special "
+                                "character except `-` and `_`.",
+        "FIRST_LETTER_PATTERN": 'The first character cannot '
+                                'be a number or special character. '
+                                'It should be an '
+                                'alphabet character, "-" or "_"',
+    }
+
+    if the_patterns['FIRST_LETTER_PATTERN']:
+        m = re.match(the_patterns['FIRST_LETTER_PATTERN'], field.data)
+        if m is None:
+            raise ValidationError(the_result['FIRST_LETTER_PATTERN'])
+        if the_patterns['ASCII_LETTER_PATTERN']:
+            m = re.match(the_patterns['ASCII_LETTER_PATTERN'], field.data)
+            if m is None:
+                raise ValidationError(the_result['ASCII_LETTER_PATTERN'])
+
 
 
 class CommunityForm(Form):
@@ -95,22 +120,16 @@ class CommunityForm(Form):
     #
     identifier = StringField(
         label=_('Identifier'),
-        description=_('Required. Only letters, numbers and dash are allowed.'
-                      ' The identifier is used in the URL for the community'
+        description=_('The identifier is used in the URL for the community'
                       ' collection, and cannot be modified later.'),
         validators=[validators.DataRequired(),
                     validators.length(
                         max=100,
-                        message=_('The identifier must be less'
-                                  ' than 100 characters long.')),
-                    validators.regexp(
-                        u'^[-\w]+$',
-                        message=_(
-                            'Only letters, numbers and dash are allowed'))]
+                        message=_('Field cannot be longer than 100 characters.')),
+                    _validate_input_id]
     )
 
     title = StringField(
-        description=_('Required.'),
         validators=[validators.DataRequired()]
     )
 
