@@ -68,7 +68,7 @@ class CommunityForm(Form):
         ('Information',
          ['identifier', 'title', 'description', 'curation_policy', 'page',
           'community_header', 'community_footer', 'logo',
-          'index_checked_nodeId', ],
+          'index_checked_nodeId'],
          {'classes': 'in'}),
     ]
 
@@ -156,24 +156,10 @@ class CommunityForm(Form):
             'the index page.'),
     )
 
-    community_header = TextAreaField(
-        description=_(
-            'Optional. A header design of the community collection,'
-            ' which will be displayed on the index page of the community.'),
-    )
-
-    community_footer = TextAreaField(
-        description=_(
-            'Optional. A footer design of the community collection,'
-            ' which will be displayed on the index page of the community.'),
-    )
-
     field_icons = {
         'identifier': 'barcode',
         'title': 'file-alt',
         'description': 'pencil',
-        'community_header': 'pencil',
-        'community_footer': 'pencil',
         'curation_policy': 'check',
     }
 
