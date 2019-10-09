@@ -64,22 +64,27 @@ class CommunityModelView(ModelView):
     def _validate_input_id(self, field):
         the_patterns = {
             "ASCII_LETTER_PATTERN": "[a-zA-Z0-9_-]+$",
-            "FIRST_LETTER_PATTERN": "^[a-zA-Z_-].*",
+            "FIRST_LETTER_PATTERN1": "^[a-zA-Z_-].*",
+            "FIRST_LETTER_PATTERN2": "^[-]+[0-9]+",
         }
         the_result = {
-            "ASCII_LETTER_PATTERN": "Don't use space or special"
+            "ASCII_LETTER_PATTERN": "Don't use space or special "
                                     "character except `-` and `_`.",
-            "FIRST_LETTER_PATTERN": 'The first character cannot '
-                                    'be a number or special character. '
-                                    'It should be an '
-                                    'alphabet character, "-" or "_"',
+            "FIRST_LETTER_PATTERN1": 'The first character cannot '
+                                     'be a number or special character. '
+                                     'It should be an '
+                                     'alphabet character, "-" or "_"',
+            "FIRST_LETTER_PATTERN2": "Cannot set negative number to ID.",
         }
-        if field.data:
-            field.data = field.data.lower()
-            if the_patterns['FIRST_LETTER_PATTERN']:
-                m = re.match(the_patterns['FIRST_LETTER_PATTERN'], field.data)
-                if m is None:
-                    raise ValidationError(the_result['FIRST_LETTER_PATTERN'])
+
+        if the_patterns['FIRST_LETTER_PATTERN1']:
+            m = re.match(the_patterns['FIRST_LETTER_PATTERN1'], field.data)
+            if m is None:
+                raise ValidationError(the_result['FIRST_LETTER_PATTERN1'])
+            if the_patterns['FIRST_LETTER_PATTERN2']:
+                m = re.match(the_patterns['FIRST_LETTER_PATTERN2'], field.data)
+                if m is not None:
+                    raise ValidationError(the_result['FIRST_LETTER_PATTERN2'])
                 if the_patterns['ASCII_LETTER_PATTERN']:
                     m = re.match(the_patterns['ASCII_LETTER_PATTERN'],
                                  field.data)
@@ -95,7 +100,7 @@ class CommunityModelView(ModelView):
 
     form_widget_args = {
         'id': {
-            'placeholder':  'Please select ID',
+            'placeholder': 'Please select ID',
             'maxlength': 100,
         }
     }
