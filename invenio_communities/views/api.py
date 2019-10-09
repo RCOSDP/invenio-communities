@@ -184,6 +184,7 @@ class CommunityDetailsResource(ContentNegotiatedMethodView):
         response.set_etag(etag)
         return response
 
+
 serializers = {'application/json': community_response}
 
 
