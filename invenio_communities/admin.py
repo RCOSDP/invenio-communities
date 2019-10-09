@@ -91,6 +91,8 @@ class CommunityModelView(ModelView):
                     if m is None:
                         raise ValidationError(
                             the_result['ASCII_LETTER_PATTERN'])
+        if field.data:
+            field.data = field.data.lower()
 
     form_args = {
         'id': {
